@@ -1,0 +1,10 @@
+D:\Desktop\ImageLoader\ImageLoader\bin\Debug\ImageLoader.exe.config
+D:\Desktop\ImageLoader\ImageLoader\bin\Debug\ImageLoader.exe
+D:\Desktop\ImageLoader\ImageLoader\bin\Debug\ImageLoader.pdb
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.csproj.AssemblyReference.cache
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.Form1.resources
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.Properties.Resources.resources
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.csproj.GenerateResource.cache
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.csproj.CoreCompileInputs.cache
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.exe
+D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.pdb
