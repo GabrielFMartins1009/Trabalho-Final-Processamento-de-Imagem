@@ -8,3 +8,13 @@ D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.csproj.GenerateResource
 D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.csproj.CoreCompileInputs.cache
 D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.exe
 D:\Desktop\ImageLoader\ImageLoader\obj\Debug\ImageLoader.pdb
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.exe.config
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.exe
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.pdb
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.AssemblyReference.cache
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.Form1.resources
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.Properties.Resources.resources
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.GenerateResource.cache
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.CoreCompileInputs.cache
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.exe
+C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.pdb

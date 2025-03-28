@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ImageLoader"
   ],
-  "SelectedNode": "\\ImageLoader.sln",
+  "SelectedNode": "\\ImageLoader\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }

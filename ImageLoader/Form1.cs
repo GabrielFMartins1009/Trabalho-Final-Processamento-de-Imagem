@@ -245,6 +245,31 @@ namespace ImageLoader
             }
 
         }
+        private void btExcluirImgC_Click(object sender, EventArgs e)
+        {
+            if (imgResultado != null)
+            {
+                imgResultado.Dispose(); // Libera a memória da imagem
+                imgResultado = null;
+               
+            }
+
+            if (pictureBox3.Image != null)
+            {
+                imgResultado?.Dispose();
+                imgResultado = null;
+                pictureBox3.Image = null;
+                pictureBox3.Refresh();
+
+                MessageBox.Show("Imagem C removida com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Nenhuma imagem C carregada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
 
         public static Bitmap DiminuirBrilho(Bitmap img, int valor)
         {
@@ -314,5 +339,82 @@ namespace ImageLoader
             pictureBox3.Image = imgResultado; // Exibir a imagem resultante
         }
 
+        public static Bitmap MultiplicarImagem(Bitmap img, float fator)
+        {
+            Bitmap result = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    // Multiplica os valores RGB pelo fator e trata overflow/underflow
+                    int r = Math.Min(Math.Max((int)(pixel.R * fator), 0), 255);
+                    int g = Math.Min(Math.Max((int)(pixel.G * fator), 0), 255);
+                    int b = Math.Min(Math.Max((int)(pixel.B * fator), 0), 255);
+
+                    result.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            return result;
+        }
+
+        public static Bitmap DividirImagem(Bitmap img, float divisor)
+        {
+            if (divisor == 0) divisor = 1; // Evita divisão por zero
+
+            Bitmap result = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    // Divide os valores RGB e trata overflow/underflow
+                    int r = Math.Min(Math.Max((int)(pixel.R / divisor), 0), 255);
+                    int g = Math.Min(Math.Max((int)(pixel.G / divisor), 0), 255);
+                    int b = Math.Min(Math.Max((int)(pixel.B / divisor), 0), 255);
+
+                    result.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            return result;
+        }
+
+        private void btMult_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem antes de processar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            float fatorMultiplicacao = 1.5f; // Aumenta contraste em 50%
+
+            Bitmap imgMultiplicada = MultiplicarImagem(img1, fatorMultiplicacao);
+           
+            pictureBox3.Image = imgMultiplicada; // Exibe imagem com mais contraste
+           
+        }
+
+        private void btDiv_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem antes de processar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+                float fatorDivisao = 4.0f; // Diminui contraste em 25%
+
+                Bitmap imgDividida = DividirImagem(img1, fatorDivisao);
+
+                pictureBox3.Image = imgDividida; // Exibe imagem com menos contraste
+
+            }
+        }
     }
 }

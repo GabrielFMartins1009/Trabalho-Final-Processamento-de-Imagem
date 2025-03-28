@@ -36,19 +36,22 @@
             this.btSomar = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.btSubtrair = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btMult = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.btExcluirImgB = new System.Windows.Forms.Button();
             this.btExcluirImgC = new System.Windows.Forms.Button();
             this.btExcluirImgA = new System.Windows.Forms.Button();
+            this.btDiv = new System.Windows.Forms.Button();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // btImgA
@@ -125,14 +128,15 @@
             this.btSubtrair.UseVisualStyleBackColor = true;
             this.btSubtrair.Click += new System.EventHandler(this.btSubtrair_Click);
             // 
-            // button3
+            // btMult
             // 
-            this.button3.Location = new System.Drawing.Point(391, 514);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(147, 54);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Multiplicar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btMult.Location = new System.Drawing.Point(391, 514);
+            this.btMult.Name = "btMult";
+            this.btMult.Size = new System.Drawing.Size(147, 54);
+            this.btMult.TabIndex = 7;
+            this.btMult.Text = "Multiplicar";
+            this.btMult.UseVisualStyleBackColor = true;
+            this.btMult.Click += new System.EventHandler(this.btMult_Click);
             // 
             // numericUpDown1
             // 
@@ -192,6 +196,7 @@
             this.btExcluirImgC.TabIndex = 12;
             this.btExcluirImgC.Text = "X";
             this.btExcluirImgC.UseVisualStyleBackColor = true;
+            this.btExcluirImgC.Click += new System.EventHandler(this.btExcluirImgC_Click);
             // 
             // btExcluirImgA
             // 
@@ -205,18 +210,42 @@
             this.btExcluirImgA.UseVisualStyleBackColor = true;
             this.btExcluirImgA.Click += new System.EventHandler(this.btExcluirImgA_Click);
             // 
+            // btDiv
+            // 
+            this.btDiv.Location = new System.Drawing.Point(391, 574);
+            this.btDiv.Name = "btDiv";
+            this.btDiv.Size = new System.Drawing.Size(147, 54);
+            this.btDiv.TabIndex = 14;
+            this.btDiv.Text = "Dividir";
+            this.btDiv.UseVisualStyleBackColor = true;
+            this.btDiv.Click += new System.EventHandler(this.btDiv_Click);
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(576, 593);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown4.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 726);
+            this.Controls.Add(this.numericUpDown4);
+            this.Controls.Add(this.btDiv);
             this.Controls.Add(this.btExcluirImgA);
             this.Controls.Add(this.btExcluirImgC);
             this.Controls.Add(this.btExcluirImgB);
             this.Controls.Add(this.numericUpDown3);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btMult);
             this.Controls.Add(this.btSubtrair);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.btSomar);
@@ -232,6 +261,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -246,13 +276,15 @@
         private System.Windows.Forms.Button btSomar;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btSubtrair;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btMult;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.Button btExcluirImgB;
         private System.Windows.Forms.Button btExcluirImgC;
         private System.Windows.Forms.Button btExcluirImgA;
+        private System.Windows.Forms.Button btDiv;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
     }
 }
 
