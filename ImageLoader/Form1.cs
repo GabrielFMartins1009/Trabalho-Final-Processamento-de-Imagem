@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,45 +73,40 @@ namespace ImageLoader
                     vImg1B = new byte[img1.Width, img1.Height];
                     vImg1A = new byte[img1.Width, img1.Height];
 
-                    // Percorre todos os pixels da imagem...
-                    /* for (int i = 0; i < img1.Width; i++)
-                      {
-                          for (int j = 0; j < img1.Height; j++)
-                          {
-                              Color pixel = img1.GetPixel(i, j);
-
-                              // Para imagens em escala de cinza, extrair o valor do pixel com...
-                              //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
-                              byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
-                              vImg1Gray[i, j] = pixelIntensity;
-
-                              // Para imagens RGB, extrair o valor do pixel com...
-                              byte R = pixel.R;
-                              byte G = pixel.G;
-                              byte B = pixel.B;
-                              byte A = pixel.A;
-
-                              vImg1R[i, j] = R;
-                              vImg1G[i, j] = G;
-                              vImg1B[i, j] = B;
-                              vImg1A[i, j] = A;
-
-                              Color cor = Color.FromArgb(
-                                  255,
-                                  vImg1Gray[i, j],
-                                  vImg1Gray[i, j],
-                                  vImg1Gray[i, j]);
-
-                              img2.SetPixel(i, j, cor);
-                          }
-                      }
-
-                      pictureBox2.Image = img2;
-                  }*/
-
                 }
             }
         }
+        private void ConverterParaEscalaDeCinza()
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem antes de converter!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Criar a imagem de saída do mesmo tamanho
+            imgResultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int i = 0; i < img1.Width; i++)
+            {
+                for (int j = 0; j < img1.Height; j++)
+                {
+                    Color pixel = img1.GetPixel(i, j);
+
+                    // Usa a média ponderada para uma melhor conversão
+                    byte pixelIntensity = (byte)(pixel.R * 0.299 + pixel.G * 0.587 + pixel.B * 0.114);
+
+                    Color corCinza = Color.FromArgb(pixelIntensity, pixelIntensity, pixelIntensity);
+
+                    imgResultado.SetPixel(i, j, corCinza);
+                }
+            }
+
+            // Exibe o resultado no PictureBox3
+            pictureBox3.Image = imgResultado;
+        }
+
+
 
         private void btImgB_Click(object sender, EventArgs e)
         {
@@ -361,9 +357,12 @@ namespace ImageLoader
             return result;
         }
 
-        public static Bitmap DividirImagem(Bitmap img, float divisor)
+        public static Bitmap DividirImagem(Bitmap img, float valor)
         {
-            if (divisor == 0) divisor = 1; // Evita divisão por zero
+            if (valor <= 0) // Evita divisão por 0 e valores negativos
+            {
+                throw new ArgumentException("O divisor deve ser maior que zero!");
+            }
 
             Bitmap result = new Bitmap(img.Width, img.Height);
 
@@ -373,17 +372,20 @@ namespace ImageLoader
                 {
                     Color pixel = img.GetPixel(x, y);
 
-                    // Divide os valores RGB e trata overflow/underflow
-                    int r = Math.Min(Math.Max((int)(pixel.R / divisor), 0), 255);
-                    int g = Math.Min(Math.Max((int)(pixel.G / divisor), 0), 255);
-                    int b = Math.Min(Math.Max((int)(pixel.B / divisor), 0), 255);
+                    // Divide os valores RGB garantindo que fiquem no intervalo de 0 a 255
+                    int r = Math.Max(0, Math.Min(255, (int)(pixel.R / valor)));
+                    int g = Math.Max(0, Math.Min(255, (int)(pixel.G / valor)));
+                    int b = Math.Max(0, Math.Min(255, (int)(pixel.B / valor)));
 
                     result.SetPixel(x, y, Color.FromArgb(r, g, b));
                 }
             }
 
             return result;
-        }
+        } 
+
+
+
 
         private void btMult_Click(object sender, EventArgs e)
         {
@@ -405,16 +407,72 @@ namespace ImageLoader
         {
             if (img1 == null)
             {
-                MessageBox.Show("Carregue uma imagem antes de processar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Carregue a imagem A antes de prosseguir!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-                float fatorDivisao = 4.0f; // Diminui contraste em 25%
+            float valorDivisao = (float)numericUpDown1.Value;
 
-                Bitmap imgDividida = DividirImagem(img1, fatorDivisao);
+            if (valorDivisao <= 0)
+            {
+                MessageBox.Show("O valor da divisão deve ser maior que zero!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                pictureBox3.Image = imgDividida; // Exibe imagem com menos contraste
-
+            try
+            {
+                imgResultado = DividirImagem(img1, valorDivisao);
+                pictureBox3.Image = imgResultado; // Atualiza PictureBox C
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao dividir a imagem: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+       
+            private void btSalvar_Click(object sender, EventArgs e)
+        {
+            if (imgResultado == null)
+            {
+                MessageBox.Show("Nenhuma imagem resultante para salvar!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|BMP Image|*.bmp|TIFF Image|*.tif";
+            saveFileDialog.Title = "Salvar Imagem";
+            saveFileDialog.FileName = "ImagemResultante";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string caminho = saveFileDialog.FileName;
+                    ImageFormat formato = ImageFormat.Png; // Define PNG como padrão
+
+                    // Verifica a extensão para escolher o formato correto
+                    if (caminho.EndsWith(".jpg"))
+                        formato = ImageFormat.Jpeg;
+                    else if (caminho.EndsWith(".bmp"))
+                        formato = ImageFormat.Bmp;
+                    else if (caminho.EndsWith(".tif"))
+                        formato = ImageFormat.Tiff;
+
+                    imgResultado.Save(caminho, formato);
+                    MessageBox.Show("Imagem salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao salvar a imagem: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void btConverterEscalaCinza_Click(object sender, EventArgs e)
+        {
+            ConverterParaEscalaDeCinza();
+        }
+
     }
 }
+

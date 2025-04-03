@@ -45,6 +45,8 @@
             this.btExcluirImgA = new System.Windows.Forms.Button();
             this.btDiv = new System.Windows.Forms.Button();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.btEscalaCinza = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -140,6 +142,12 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown1.Location = new System.Drawing.Point(576, 410);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             255,
@@ -147,11 +155,17 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown1.TabIndex = 8;
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown2.Location = new System.Drawing.Point(576, 473);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             255,
@@ -159,11 +173,17 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown2.TabIndex = 9;
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.DecimalPlaces = 2;
+            this.numericUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown3.Location = new System.Drawing.Point(576, 533);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             255,
@@ -171,7 +191,7 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown3.TabIndex = 10;
             // 
             // btExcluirImgB
@@ -222,6 +242,12 @@
             // 
             // numericUpDown4
             // 
+            this.numericUpDown4.DecimalPlaces = 2;
+            this.numericUpDown4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown4.Location = new System.Drawing.Point(576, 593);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             255,
@@ -229,14 +255,36 @@
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown4.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown4.TabIndex = 15;
+            // 
+            // btSalvar
+            // 
+            this.btSalvar.Location = new System.Drawing.Point(684, 394);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(147, 54);
+            this.btSalvar.TabIndex = 16;
+            this.btSalvar.Text = "Salvar";
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
+            // 
+            // btEscalaCinza
+            // 
+            this.btEscalaCinza.Location = new System.Drawing.Point(684, 454);
+            this.btEscalaCinza.Name = "btEscalaCinza";
+            this.btEscalaCinza.Size = new System.Drawing.Size(147, 54);
+            this.btEscalaCinza.TabIndex = 17;
+            this.btEscalaCinza.Text = "Escala Cinza";
+            this.btEscalaCinza.UseVisualStyleBackColor = true;
+            this.btEscalaCinza.Click += new System.EventHandler(this.btConverterEscalaCinza_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 726);
+            this.Controls.Add(this.btEscalaCinza);
+            this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.numericUpDown4);
             this.Controls.Add(this.btDiv);
             this.Controls.Add(this.btExcluirImgA);
@@ -285,6 +333,8 @@
         private System.Windows.Forms.Button btExcluirImgA;
         private System.Windows.Forms.Button btDiv;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.Button btSalvar;
+        private System.Windows.Forms.Button btEscalaCinza;
     }
 }
 
