@@ -139,7 +139,7 @@ namespace ImageLoader
             }
         }
 
-        public static Bitmap SomarImagens(Bitmap img1, Bitmap img2)
+        private Bitmap SomarImagens(Bitmap img1, Bitmap img2)
         {
             if (img1.Width != img2.Width || img1.Height != img2.Height)
                 throw new ArgumentException("As imagens devem ter as mesmas dimensões!");
@@ -158,13 +158,15 @@ namespace ImageLoader
                     int g = Math.Min(p1.G + p2.G, 255);
                     int b = Math.Min(p1.B + p2.B, 255);
 
-                    result.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    Color corFinal = Color.FromArgb(r, g, b);
+
+                    result.SetPixel(x, y, corFinal);
                 }
             }
             return result;
         }
 
-        public static Bitmap AumentarBrilho(Bitmap img, int valor)
+        private Bitmap AumentarBrilho(Bitmap img, int valor)
         {
             Bitmap result = new Bitmap(img.Width, img.Height);
 
@@ -384,9 +386,6 @@ namespace ImageLoader
             return result;
         } 
 
-
-
-
         private void btMult_Click(object sender, EventArgs e)
         {
             if (img1 == null)
@@ -472,7 +471,33 @@ namespace ImageLoader
         {
             ConverterParaEscalaDeCinza();
         }
+        private Bitmap InverterHorizontalmente(Bitmap img1)
+        {
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+                throw new ArgumentException("As imagens devem ter as mesmas dimensões!");
 
+            Bitmap result = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+
+                    Color corFinal = Color.FromArgb(x);
+
+                    result.SetPixel(img1.Width - x - 1, y, corFinal);
+                    
+                }
+            }
+            return result;
+
+        }
+
+        private void btInverterHor_Click(object sender, EventArgs e)
+        {
+            pictureBox3.Image = InverterHorizontalmente(img1);
+        }
     }
 }
 

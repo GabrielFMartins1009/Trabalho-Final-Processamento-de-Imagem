@@ -47,6 +47,7 @@
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btEscalaCinza = new System.Windows.Forms.Button();
+            this.btInverterHor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -278,11 +279,22 @@
             this.btEscalaCinza.UseVisualStyleBackColor = true;
             this.btEscalaCinza.Click += new System.EventHandler(this.btConverterEscalaCinza_Click);
             // 
+            // btInverterHor
+            // 
+            this.btInverterHor.Location = new System.Drawing.Point(684, 514);
+            this.btInverterHor.Name = "btInverterHor";
+            this.btInverterHor.Size = new System.Drawing.Size(147, 54);
+            this.btInverterHor.TabIndex = 18;
+            this.btInverterHor.Text = "Inverter Horizontalmente ";
+            this.btInverterHor.UseVisualStyleBackColor = true;
+            this.btInverterHor.Click += new System.EventHandler(this.btInverterHor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 726);
+            this.Controls.Add(this.btInverterHor);
             this.Controls.Add(this.btEscalaCinza);
             this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.numericUpDown4);
@@ -335,6 +347,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btEscalaCinza;
+        private System.Windows.Forms.Button btInverterHor;
     }
 }
 

@@ -18,3 +18,13 @@ C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processame
 C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.CoreCompileInputs.cache
 C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.exe
 C:\Users\Gabriel\Desktop\Trabalho Final - Proc. Imagem\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.pdb
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.exe.config
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.exe
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\bin\Debug\ImageLoader.pdb
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.AssemblyReference.cache
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.Form1.resources
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.Properties.Resources.resources
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.GenerateResource.cache
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.csproj.CoreCompileInputs.cache
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.exe
+C:\Users\Computacao\Desktop\Nova pasta\Trabalho-Final-Processamento-de-Imagem\ImageLoader\obj\Debug\ImageLoader.pdb
