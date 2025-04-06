@@ -473,9 +473,6 @@ namespace ImageLoader
         }
         private Bitmap InverterHorizontalmente(Bitmap img1)
         {
-            if (img1.Width != img2.Width || img1.Height != img2.Height)
-                throw new ArgumentException("As imagens devem ter as mesmas dimensões!");
-
             Bitmap result = new Bitmap(img1.Width, img1.Height);
 
             for (int x = 0; x < img1.Width; x++)
@@ -484,19 +481,75 @@ namespace ImageLoader
                 {
                     Color p1 = img1.GetPixel(x, y);
 
-                    Color corFinal = Color.FromArgb(x);
-
-                    result.SetPixel(img1.Width - x - 1, y, corFinal);
-                    
+                    // Define o pixel na posição espelhada
+                    result.SetPixel(img1.Width - x - 1, y, p1);
                 }
             }
-            return result;
 
+            return result;
         }
 
         private void btInverterHor_Click(object sender, EventArgs e)
         {
             pictureBox3.Image = InverterHorizontalmente(img1);
+        }
+        private Bitmap InverterVerticalmente(Bitmap img1)
+        {
+            Bitmap result = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+
+                    // Define o pixel na posição espelhada verticalmente
+                    result.SetPixel(x, img1.Height - y - 1, p1);
+                }
+            }
+
+            return result;
+        }
+
+        private void btInverterVer_Click(object sender, EventArgs e)
+        {
+            pictureBox3.Image = InverterVerticalmente(img1);
+
+        }
+        private void MostrarDiferencaFinal()
+        {
+            // Verifica se as imagens foram carregadas
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue as duas imagens primeiro!");
+                return;
+            }
+
+            // Verifica se as dimensões são iguais
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter as mesmas dimensões!");
+                return;
+            }
+
+            // C = img1 - img2
+            Bitmap imgC = SubtrairImagens(img1, img2);
+
+            // D = img2 - img1
+            Bitmap imgD = SubtrairImagens(img2, img1);
+
+            // E = C + D
+            Bitmap imgE = SomarImagens(imgC, imgD);
+
+            // Exibe o resultado na pictureBox3
+            pictureBox3.Image = imgE;
+        }
+
+
+        private void Diferenca_Click(object sender, EventArgs e)
+        {
+            MostrarDiferencaFinal();
+
         }
     }
 }

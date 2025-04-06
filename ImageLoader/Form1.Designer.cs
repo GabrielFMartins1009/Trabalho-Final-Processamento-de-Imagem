@@ -48,6 +48,8 @@
             this.btSalvar = new System.Windows.Forms.Button();
             this.btEscalaCinza = new System.Windows.Forms.Button();
             this.btInverterHor = new System.Windows.Forms.Button();
+            this.btInverterVer = new System.Windows.Forms.Button();
+            this.Diferenca = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -289,11 +291,33 @@
             this.btInverterHor.UseVisualStyleBackColor = true;
             this.btInverterHor.Click += new System.EventHandler(this.btInverterHor_Click);
             // 
+            // btInverterVer
+            // 
+            this.btInverterVer.Location = new System.Drawing.Point(684, 574);
+            this.btInverterVer.Name = "btInverterVer";
+            this.btInverterVer.Size = new System.Drawing.Size(147, 54);
+            this.btInverterVer.TabIndex = 19;
+            this.btInverterVer.Text = "Inverter Verticalmente";
+            this.btInverterVer.UseVisualStyleBackColor = true;
+            this.btInverterVer.Click += new System.EventHandler(this.btInverterVer_Click);
+            // 
+            // Diferenca
+            // 
+            this.Diferenca.Location = new System.Drawing.Point(837, 394);
+            this.Diferenca.Name = "Diferenca";
+            this.Diferenca.Size = new System.Drawing.Size(147, 54);
+            this.Diferenca.TabIndex = 20;
+            this.Diferenca.Text = "Diferença entre Imagens";
+            this.Diferenca.UseVisualStyleBackColor = true;
+            this.Diferenca.Click += new System.EventHandler(this.Diferenca_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 726);
+            this.ClientSize = new System.Drawing.Size(1101, 748);
+            this.Controls.Add(this.Diferenca);
+            this.Controls.Add(this.btInverterVer);
             this.Controls.Add(this.btInverterHor);
             this.Controls.Add(this.btEscalaCinza);
             this.Controls.Add(this.btSalvar);
@@ -348,6 +372,8 @@
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btEscalaCinza;
         private System.Windows.Forms.Button btInverterHor;
+        private System.Windows.Forms.Button btInverterVer;
+        private System.Windows.Forms.Button Diferenca;
     }
 }
 
