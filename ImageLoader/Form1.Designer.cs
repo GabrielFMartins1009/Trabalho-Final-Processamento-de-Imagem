@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -50,6 +51,18 @@
             this.btInverterHor = new System.Windows.Forms.Button();
             this.btInverterVer = new System.Windows.Forms.Button();
             this.Diferenca = new System.Windows.Forms.Button();
+            this.btBlending = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.btMedia = new System.Windows.Forms.Button();
+            this.chartHistograma = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btEqualizar = new System.Windows.Forms.Button();
+            this.btnNot = new System.Windows.Forms.Button();
+            this.btnAnd = new System.Windows.Forms.Button();
+            this.btnOr = new System.Windows.Forms.Button();
+            this.btnXor = new System.Windows.Forms.Button();
+            this.btnLimiar = new System.Windows.Forms.Button();
+            this.numericUpDownThreshold = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -57,6 +70,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // btImgA
@@ -86,7 +102,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(391, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(548, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(319, 290);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -95,7 +111,7 @@
             // 
             // btImgB
             // 
-            this.btImgB.Location = new System.Drawing.Point(479, 308);
+            this.btImgB.Location = new System.Drawing.Point(636, 308);
             this.btImgB.Name = "btImgB";
             this.btImgB.Size = new System.Drawing.Size(163, 37);
             this.btImgB.TabIndex = 3;
@@ -105,7 +121,7 @@
             // 
             // btSomar
             // 
-            this.btSomar.Location = new System.Drawing.Point(391, 394);
+            this.btSomar.Location = new System.Drawing.Point(12, 403);
             this.btSomar.Name = "btSomar";
             this.btSomar.Size = new System.Drawing.Size(147, 54);
             this.btSomar.TabIndex = 4;
@@ -116,7 +132,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 391);
+            this.pictureBox3.Location = new System.Drawing.Point(965, 12);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(319, 290);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -125,7 +141,7 @@
             // 
             // btSubtrair
             // 
-            this.btSubtrair.Location = new System.Drawing.Point(391, 454);
+            this.btSubtrair.Location = new System.Drawing.Point(12, 463);
             this.btSubtrair.Name = "btSubtrair";
             this.btSubtrair.Size = new System.Drawing.Size(147, 54);
             this.btSubtrair.TabIndex = 6;
@@ -135,7 +151,7 @@
             // 
             // btMult
             // 
-            this.btMult.Location = new System.Drawing.Point(391, 514);
+            this.btMult.Location = new System.Drawing.Point(12, 523);
             this.btMult.Name = "btMult";
             this.btMult.Size = new System.Drawing.Size(147, 54);
             this.btMult.TabIndex = 7;
@@ -145,13 +161,12 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.DecimalPlaces = 2;
             this.numericUpDown1.Increment = new decimal(new int[] {
-            1,
             0,
             0,
-            65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(576, 410);
+            0,
+            0});
+            this.numericUpDown1.Location = new System.Drawing.Point(165, 419);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             255,
             0,
@@ -163,13 +178,12 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
             this.numericUpDown2.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown2.Location = new System.Drawing.Point(576, 473);
+            this.numericUpDown2.Location = new System.Drawing.Point(165, 482);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             255,
             0,
@@ -187,7 +201,7 @@
             0,
             0,
             65536});
-            this.numericUpDown3.Location = new System.Drawing.Point(576, 533);
+            this.numericUpDown3.Location = new System.Drawing.Point(165, 542);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             255,
             0,
@@ -201,7 +215,7 @@
             // 
             this.btExcluirImgB.ForeColor = System.Drawing.Color.Red;
             this.btExcluirImgB.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btExcluirImgB.Location = new System.Drawing.Point(684, 12);
+            this.btExcluirImgB.Location = new System.Drawing.Point(841, 12);
             this.btExcluirImgB.Name = "btExcluirImgB";
             this.btExcluirImgB.Size = new System.Drawing.Size(26, 23);
             this.btExcluirImgB.TabIndex = 11;
@@ -213,7 +227,7 @@
             // 
             this.btExcluirImgC.ForeColor = System.Drawing.Color.Red;
             this.btExcluirImgC.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.btExcluirImgC.Location = new System.Drawing.Point(305, 391);
+            this.btExcluirImgC.Location = new System.Drawing.Point(1258, 12);
             this.btExcluirImgC.Name = "btExcluirImgC";
             this.btExcluirImgC.Size = new System.Drawing.Size(26, 23);
             this.btExcluirImgC.TabIndex = 12;
@@ -235,7 +249,7 @@
             // 
             // btDiv
             // 
-            this.btDiv.Location = new System.Drawing.Point(391, 574);
+            this.btDiv.Location = new System.Drawing.Point(12, 583);
             this.btDiv.Name = "btDiv";
             this.btDiv.Size = new System.Drawing.Size(147, 54);
             this.btDiv.TabIndex = 14;
@@ -250,20 +264,30 @@
             1,
             0,
             0,
-            65536});
-            this.numericUpDown4.Location = new System.Drawing.Point(576, 593);
+            131072});
+            this.numericUpDown4.Location = new System.Drawing.Point(165, 602);
             this.numericUpDown4.Maximum = new decimal(new int[] {
-            255,
+            1,
             0,
             0,
             0});
+            this.numericUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown4.TabIndex = 15;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             // 
             // btSalvar
             // 
-            this.btSalvar.Location = new System.Drawing.Point(684, 394);
+            this.btSalvar.Location = new System.Drawing.Point(363, 12);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(147, 54);
             this.btSalvar.TabIndex = 16;
@@ -273,7 +297,7 @@
             // 
             // btEscalaCinza
             // 
-            this.btEscalaCinza.Location = new System.Drawing.Point(684, 454);
+            this.btEscalaCinza.Location = new System.Drawing.Point(363, 72);
             this.btEscalaCinza.Name = "btEscalaCinza";
             this.btEscalaCinza.Size = new System.Drawing.Size(147, 54);
             this.btEscalaCinza.TabIndex = 17;
@@ -283,7 +307,7 @@
             // 
             // btInverterHor
             // 
-            this.btInverterHor.Location = new System.Drawing.Point(684, 514);
+            this.btInverterHor.Location = new System.Drawing.Point(363, 132);
             this.btInverterHor.Name = "btInverterHor";
             this.btInverterHor.Size = new System.Drawing.Size(147, 54);
             this.btInverterHor.TabIndex = 18;
@@ -293,7 +317,7 @@
             // 
             // btInverterVer
             // 
-            this.btInverterVer.Location = new System.Drawing.Point(684, 574);
+            this.btInverterVer.Location = new System.Drawing.Point(363, 192);
             this.btInverterVer.Name = "btInverterVer";
             this.btInverterVer.Size = new System.Drawing.Size(147, 54);
             this.btInverterVer.TabIndex = 19;
@@ -303,7 +327,7 @@
             // 
             // Diferenca
             // 
-            this.Diferenca.Location = new System.Drawing.Point(837, 394);
+            this.Diferenca.Location = new System.Drawing.Point(363, 252);
             this.Diferenca.Name = "Diferenca";
             this.Diferenca.Size = new System.Drawing.Size(147, 54);
             this.Diferenca.TabIndex = 20;
@@ -311,11 +335,148 @@
             this.Diferenca.UseVisualStyleBackColor = true;
             this.Diferenca.Click += new System.EventHandler(this.Diferenca_Click);
             // 
+            // btBlending
+            // 
+            this.btBlending.Location = new System.Drawing.Point(12, 643);
+            this.btBlending.Name = "btBlending";
+            this.btBlending.Size = new System.Drawing.Size(147, 54);
+            this.btBlending.TabIndex = 21;
+            this.btBlending.Text = "Blending";
+            this.btBlending.UseVisualStyleBackColor = true;
+            this.btBlending.Click += new System.EventHandler(this.btBlending_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(868, 148);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 20);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Resultado =";
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(165, 659);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDown5.TabIndex = 23;
+            // 
+            // btMedia
+            // 
+            this.btMedia.Location = new System.Drawing.Point(363, 403);
+            this.btMedia.Name = "btMedia";
+            this.btMedia.Size = new System.Drawing.Size(147, 54);
+            this.btMedia.TabIndex = 24;
+            this.btMedia.Text = "Media";
+            this.btMedia.UseVisualStyleBackColor = true;
+            this.btMedia.Click += new System.EventHandler(this.btMedia_Click);
+            // 
+            // chartHistograma
+            // 
+            this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
+            this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
+            chartArea6.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea6);
+            this.chartHistograma.Location = new System.Drawing.Point(12, 714);
+            this.chartHistograma.Name = "chartHistograma";
+            this.chartHistograma.Size = new System.Drawing.Size(368, 245);
+            this.chartHistograma.TabIndex = 25;
+            // 
+            // btEqualizar
+            // 
+            this.btEqualizar.Location = new System.Drawing.Point(636, 403);
+            this.btEqualizar.Name = "btEqualizar";
+            this.btEqualizar.Size = new System.Drawing.Size(147, 54);
+            this.btEqualizar.TabIndex = 26;
+            this.btEqualizar.Text = "Equalizar";
+            this.btEqualizar.UseVisualStyleBackColor = true;
+            this.btEqualizar.Click += new System.EventHandler(this.btEqualizar_Click);
+            // 
+            // btnNot
+            // 
+            this.btnNot.Location = new System.Drawing.Point(363, 463);
+            this.btnNot.Name = "btnNot";
+            this.btnNot.Size = new System.Drawing.Size(147, 54);
+            this.btnNot.TabIndex = 27;
+            this.btnNot.Text = "NOT";
+            this.btnNot.UseVisualStyleBackColor = true;
+            this.btnNot.Click += new System.EventHandler(this.btnNot_Click);
+            // 
+            // btnAnd
+            // 
+            this.btnAnd.Location = new System.Drawing.Point(363, 523);
+            this.btnAnd.Name = "btnAnd";
+            this.btnAnd.Size = new System.Drawing.Size(147, 54);
+            this.btnAnd.TabIndex = 28;
+            this.btnAnd.Text = "AND";
+            this.btnAnd.UseVisualStyleBackColor = true;
+            this.btnAnd.Click += new System.EventHandler(this.btnAnd_Click);
+            // 
+            // btnOr
+            // 
+            this.btnOr.Location = new System.Drawing.Point(363, 583);
+            this.btnOr.Name = "btnOr";
+            this.btnOr.Size = new System.Drawing.Size(147, 54);
+            this.btnOr.TabIndex = 29;
+            this.btnOr.Text = "OR";
+            this.btnOr.UseVisualStyleBackColor = true;
+            this.btnOr.Click += new System.EventHandler(this.btnOr_Click);
+            // 
+            // btnXor
+            // 
+            this.btnXor.Location = new System.Drawing.Point(363, 643);
+            this.btnXor.Name = "btnXor";
+            this.btnXor.Size = new System.Drawing.Size(147, 54);
+            this.btnXor.TabIndex = 30;
+            this.btnXor.Text = "XOR";
+            this.btnXor.UseVisualStyleBackColor = true;
+            this.btnXor.Click += new System.EventHandler(this.btnXor_Click);
+            // 
+            // btnLimiar
+            // 
+            this.btnLimiar.Location = new System.Drawing.Point(636, 463);
+            this.btnLimiar.Name = "btnLimiar";
+            this.btnLimiar.Size = new System.Drawing.Size(147, 54);
+            this.btnLimiar.TabIndex = 31;
+            this.btnLimiar.Text = "Limiarização";
+            this.btnLimiar.UseVisualStyleBackColor = true;
+            this.btnLimiar.Click += new System.EventHandler(this.btnLimiar_Click);
+            // 
+            // numericUpDownThreshold
+            // 
+            this.numericUpDownThreshold.Location = new System.Drawing.Point(789, 482);
+            this.numericUpDownThreshold.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDownThreshold.Name = "numericUpDownThreshold";
+            this.numericUpDownThreshold.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDownThreshold.TabIndex = 32;
+            this.numericUpDownThreshold.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 748);
+            this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.Controls.Add(this.numericUpDownThreshold);
+            this.Controls.Add(this.btnLimiar);
+            this.Controls.Add(this.btnXor);
+            this.Controls.Add(this.btnOr);
+            this.Controls.Add(this.btnAnd);
+            this.Controls.Add(this.btnNot);
+            this.Controls.Add(this.btEqualizar);
+            this.Controls.Add(this.chartHistograma);
+            this.Controls.Add(this.btMedia);
+            this.Controls.Add(this.numericUpDown5);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btBlending);
             this.Controls.Add(this.Diferenca);
             this.Controls.Add(this.btInverterVer);
             this.Controls.Add(this.btInverterHor);
@@ -346,7 +507,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -374,6 +539,18 @@
         private System.Windows.Forms.Button btInverterHor;
         private System.Windows.Forms.Button btInverterVer;
         private System.Windows.Forms.Button Diferenca;
+        private System.Windows.Forms.Button btBlending;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.Button btMedia;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistograma;
+        private System.Windows.Forms.Button btEqualizar;
+        private System.Windows.Forms.Button btnNot;
+        private System.Windows.Forms.Button btnAnd;
+        private System.Windows.Forms.Button btnOr;
+        private System.Windows.Forms.Button btnXor;
+        private System.Windows.Forms.Button btnLimiar;
+        private System.Windows.Forms.NumericUpDown numericUpDownThreshold;
     }
 }
 
