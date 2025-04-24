@@ -1019,6 +1019,85 @@ namespace ImageLoader
                 MessageBox.Show("Carregue uma imagem em escala de cinza na Imagem A.");
             }
         }
+        private Bitmap AplicarFiltro(Bitmap imagemOriginal, string tipoFiltro)
+        {
+            int largura = imagemOriginal.Width;
+            int altura = imagemOriginal.Height;
+
+            // Cria imagem final com mesma dimensão
+            Bitmap imagemFiltrada = new Bitmap(largura, altura);
+
+            // Percorre cada pixel da imagem
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+                    // Listas para guardar valores dos canais da vizinhança
+                    List<int> valoresR = new List<int>();
+                    List<int> valoresG = new List<int>();
+                    List<int> valoresB = new List<int>();
+
+                    // Percorre a vizinhança 3x3
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            int vizinhoX = x + i;
+                            int vizinhoY = y + j;
+
+                            // Tratamento de borda: replica o pixel mais próximo (clamp)
+                            if (vizinhoX < 0) vizinhoX = 0;
+                            if (vizinhoY < 0) vizinhoY = 0;
+                            if (vizinhoX >= largura) vizinhoX = largura - 1;
+                            if (vizinhoY >= altura) vizinhoY = altura - 1;
+
+                            Color corVizinho = imagemOriginal.GetPixel(vizinhoX, vizinhoY);
+
+                            valoresR.Add(corVizinho.R);
+                            valoresG.Add(corVizinho.G);
+                            valoresB.Add(corVizinho.B);
+                        }
+                    }
+
+                    // Calcula novo valor com base no tipo de filtro
+                    int novoR = 0, novoG = 0, novoB = 0;
+
+                    if (tipoFiltro == "MIN")
+                    {
+                        novoR = valoresR.Min();
+                        novoG = valoresG.Min();
+                        novoB = valoresB.Min();
+                    }
+                    else if (tipoFiltro == "MAX")
+                    {
+                        novoR = valoresR.Max();
+                        novoG = valoresG.Max();
+                        novoB = valoresB.Max();
+                    }
+                    else if (tipoFiltro == "MEAN")
+                    {
+                        novoR = (int)valoresR.Average();
+                        novoG = (int)valoresG.Average();
+                        novoB = (int)valoresB.Average();
+                    }
+
+                    // Aplica o novo pixel na imagem filtrada
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(novoR, novoG, novoB));
+                }
+            }
+
+            return imagemFiltrada;
+        }
+
+        private void comboBoxFiltros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (img1 != null && comboBoxFiltros.SelectedItem != null)
+            {
+                string tipoFiltro = comboBoxFiltros.SelectedItem.ToString();
+                Bitmap novaImagem = AplicarFiltro(img1, tipoFiltro);
+                pictureBox3.Image = novaImagem;
+            }
+        }
     }
 }
 

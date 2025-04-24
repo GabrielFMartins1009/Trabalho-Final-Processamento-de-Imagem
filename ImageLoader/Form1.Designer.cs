@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -63,6 +63,7 @@
             this.btnXor = new System.Windows.Forms.Button();
             this.btnLimiar = new System.Windows.Forms.Button();
             this.numericUpDownThreshold = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxFiltros = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -91,7 +92,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(319, 290);
@@ -101,7 +102,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox2.Location = new System.Drawing.Point(548, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(319, 290);
@@ -131,7 +132,8 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.No;
             this.pictureBox3.Location = new System.Drawing.Point(965, 12);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(319, 290);
@@ -166,7 +168,7 @@
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(165, 419);
+            this.numericUpDown1.Location = new System.Drawing.Point(165, 422);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             255,
             0,
@@ -357,14 +359,14 @@
             // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(165, 659);
+            this.numericUpDown5.Location = new System.Drawing.Point(165, 662);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(66, 20);
             this.numericUpDown5.TabIndex = 23;
             // 
             // btMedia
             // 
-            this.btMedia.Location = new System.Drawing.Point(363, 403);
+            this.btMedia.Location = new System.Drawing.Point(361, 403);
             this.btMedia.Name = "btMedia";
             this.btMedia.Size = new System.Drawing.Size(147, 54);
             this.btMedia.TabIndex = 24;
@@ -376,8 +378,8 @@
             // 
             this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
             this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
-            chartArea6.Name = "Histograma";
-            this.chartHistograma.ChartAreas.Add(chartArea6);
+            chartArea5.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea5);
             this.chartHistograma.Location = new System.Drawing.Point(12, 714);
             this.chartHistograma.Name = "chartHistograma";
             this.chartHistograma.Size = new System.Drawing.Size(368, 245);
@@ -385,7 +387,7 @@
             // 
             // btEqualizar
             // 
-            this.btEqualizar.Location = new System.Drawing.Point(636, 403);
+            this.btEqualizar.Location = new System.Drawing.Point(548, 403);
             this.btEqualizar.Name = "btEqualizar";
             this.btEqualizar.Size = new System.Drawing.Size(147, 54);
             this.btEqualizar.TabIndex = 26;
@@ -395,7 +397,7 @@
             // 
             // btnNot
             // 
-            this.btnNot.Location = new System.Drawing.Point(363, 463);
+            this.btnNot.Location = new System.Drawing.Point(361, 463);
             this.btnNot.Name = "btnNot";
             this.btnNot.Size = new System.Drawing.Size(147, 54);
             this.btnNot.TabIndex = 27;
@@ -405,7 +407,7 @@
             // 
             // btnAnd
             // 
-            this.btnAnd.Location = new System.Drawing.Point(363, 523);
+            this.btnAnd.Location = new System.Drawing.Point(361, 523);
             this.btnAnd.Name = "btnAnd";
             this.btnAnd.Size = new System.Drawing.Size(147, 54);
             this.btnAnd.TabIndex = 28;
@@ -415,7 +417,7 @@
             // 
             // btnOr
             // 
-            this.btnOr.Location = new System.Drawing.Point(363, 583);
+            this.btnOr.Location = new System.Drawing.Point(361, 583);
             this.btnOr.Name = "btnOr";
             this.btnOr.Size = new System.Drawing.Size(147, 54);
             this.btnOr.TabIndex = 29;
@@ -425,7 +427,7 @@
             // 
             // btnXor
             // 
-            this.btnXor.Location = new System.Drawing.Point(363, 643);
+            this.btnXor.Location = new System.Drawing.Point(361, 643);
             this.btnXor.Name = "btnXor";
             this.btnXor.Size = new System.Drawing.Size(147, 54);
             this.btnXor.TabIndex = 30;
@@ -435,7 +437,7 @@
             // 
             // btnLimiar
             // 
-            this.btnLimiar.Location = new System.Drawing.Point(636, 463);
+            this.btnLimiar.Location = new System.Drawing.Point(548, 463);
             this.btnLimiar.Name = "btnLimiar";
             this.btnLimiar.Size = new System.Drawing.Size(147, 54);
             this.btnLimiar.TabIndex = 31;
@@ -445,7 +447,7 @@
             // 
             // numericUpDownThreshold
             // 
-            this.numericUpDownThreshold.Location = new System.Drawing.Point(789, 482);
+            this.numericUpDownThreshold.Location = new System.Drawing.Point(701, 482);
             this.numericUpDownThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -460,11 +462,27 @@
             0,
             0});
             // 
+            // comboBoxFiltros
+            // 
+            this.comboBoxFiltros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxFiltros.FormattingEnabled = true;
+            this.comboBoxFiltros.Items.AddRange(new object[] {
+            "MAX",
+            "MIN",
+            "MEAN"});
+            this.comboBoxFiltros.Location = new System.Drawing.Point(548, 643);
+            this.comboBoxFiltros.Name = "comboBoxFiltros";
+            this.comboBoxFiltros.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxFiltros.TabIndex = 33;
+            this.comboBoxFiltros.SelectedIndexChanged += new System.EventHandler(this.comboBoxFiltros_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.Controls.Add(this.comboBoxFiltros);
             this.Controls.Add(this.numericUpDownThreshold);
             this.Controls.Add(this.btnLimiar);
             this.Controls.Add(this.btnXor);
@@ -551,6 +569,7 @@
         private System.Windows.Forms.Button btnXor;
         private System.Windows.Forms.Button btnLimiar;
         private System.Windows.Forms.NumericUpDown numericUpDownThreshold;
+        private System.Windows.Forms.ComboBox comboBoxFiltros;
     }
 }
 
