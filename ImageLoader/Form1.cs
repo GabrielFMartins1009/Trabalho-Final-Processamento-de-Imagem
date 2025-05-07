@@ -1098,7 +1098,71 @@ namespace ImageLoader
                 pictureBox3.Image = novaImagem;
             }
         }
-    }
+        public Bitmap FiltroSalPimentaMediana(Bitmap imagemOriginal)
+        {
+            // Cria uma nova imagem do mesmo tamanho para armazenar o resultado do filtro
+            Bitmap imagemFiltrada = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // Percorre a imagem, ignorando a borda (evita sair dos limites na janela 3x3)
+            for (int y = 1; y < imagemOriginal.Height - 1; y++)
+            {
+                for (int x = 1; x < imagemOriginal.Width - 1; x++)
+                {
+                    // Listas para armazenar os valores dos canais R, G e B dos pixels vizinhos
+                    List<byte> valoresR = new List<byte>();
+                    List<byte> valoresG = new List<byte>();
+                    List<byte> valoresB = new List<byte>();
+
+                    // Percorre a vizinhança 3x3 ao redor do pixel (x, y)
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            // Obtém a cor do pixel vizinho
+                            Color pixel = imagemOriginal.GetPixel(x + i, y + j);
+
+                            // Adiciona os valores de R, G e B às respectivas listas
+                            valoresR.Add(pixel.R);
+                            valoresG.Add(pixel.G);
+                            valoresB.Add(pixel.B);
+                        }
+                    }
+
+                    // Ordena as listas de valores dos canais
+                    valoresR.Sort();
+                    valoresG.Sort();
+                    valoresB.Sort();
+
+                    // A mediana é o valor que está na posição central (5ª posição de 0 a 8)
+                    byte medianaR = valoresR[4];
+                    byte medianaG = valoresG[4];
+                    byte medianaB = valoresB[4];
+
+                    // Cria uma nova cor com os valores medianos
+                    Color novaCor = Color.FromArgb(medianaR, medianaG, medianaB);
+
+                    // Define essa nova cor no pixel correspondente da imagem filtrada
+                    imagemFiltrada.SetPixel(x, y, novaCor);
+                }
+            }
+
+            // Retorna a imagem com o filtro de mediana aplicado
+            return imagemFiltrada;
+        }
+
+        private void btnSalPimenta_Click(object sender, EventArgs e)
+        {
+         
+            if (pictureBox1.Image != null)
+            {
+                Bitmap original = new Bitmap(pictureBox1.Image);
+                Bitmap resultado = FiltroSalPimentaMediana(original);
+                pictureBox3.Image = resultado;
+            }
+        
+
+        }
+}
 }
 
 
