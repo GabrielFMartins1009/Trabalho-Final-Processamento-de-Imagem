@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -65,6 +65,9 @@
             this.numericUpDownThreshold = new System.Windows.Forms.NumericUpDown();
             this.comboBoxFiltros = new System.Windows.Forms.ComboBox();
             this.btnSalPimenta = new System.Windows.Forms.Button();
+            this.btnSalPimentaOrdem = new System.Windows.Forms.Button();
+            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.btnSalPimentaSuavizacao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -75,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.SuspendLayout();
             // 
             // btImgA
@@ -369,8 +373,8 @@
             // 
             this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
             this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
-            chartArea1.Name = "Histograma";
-            this.chartHistograma.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea2);
             this.chartHistograma.Location = new System.Drawing.Point(12, 714);
             this.chartHistograma.Name = "chartHistograma";
             this.chartHistograma.Size = new System.Drawing.Size(368, 245);
@@ -378,7 +382,7 @@
             // 
             // btEqualizar
             // 
-            this.btEqualizar.Location = new System.Drawing.Point(548, 403);
+            this.btEqualizar.Location = new System.Drawing.Point(548, 583);
             this.btEqualizar.Name = "btEqualizar";
             this.btEqualizar.Size = new System.Drawing.Size(147, 54);
             this.btEqualizar.TabIndex = 26;
@@ -428,7 +432,7 @@
             // 
             // btnLimiar
             // 
-            this.btnLimiar.Location = new System.Drawing.Point(548, 463);
+            this.btnLimiar.Location = new System.Drawing.Point(548, 643);
             this.btnLimiar.Name = "btnLimiar";
             this.btnLimiar.Size = new System.Drawing.Size(147, 54);
             this.btnLimiar.TabIndex = 31;
@@ -438,7 +442,7 @@
             // 
             // numericUpDownThreshold
             // 
-            this.numericUpDownThreshold.Location = new System.Drawing.Point(701, 482);
+            this.numericUpDownThreshold.Location = new System.Drawing.Point(701, 662);
             this.numericUpDownThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -462,7 +466,7 @@
             "MAX",
             "MIN",
             "MEAN"});
-            this.comboBoxFiltros.Location = new System.Drawing.Point(548, 643);
+            this.comboBoxFiltros.Location = new System.Drawing.Point(872, 421);
             this.comboBoxFiltros.Name = "comboBoxFiltros";
             this.comboBoxFiltros.Size = new System.Drawing.Size(147, 21);
             this.comboBoxFiltros.TabIndex = 33;
@@ -470,19 +474,59 @@
             // 
             // btnSalPimenta
             // 
-            this.btnSalPimenta.Location = new System.Drawing.Point(548, 523);
+            this.btnSalPimenta.Location = new System.Drawing.Point(548, 403);
             this.btnSalPimenta.Name = "btnSalPimenta";
             this.btnSalPimenta.Size = new System.Drawing.Size(147, 54);
             this.btnSalPimenta.TabIndex = 34;
-            this.btnSalPimenta.Text = "Filtro Sal Pimenta";
+            this.btnSalPimenta.Text = "Sal Pimenta - Mediana";
             this.btnSalPimenta.UseVisualStyleBackColor = true;
             this.btnSalPimenta.Click += new System.EventHandler(this.btnSalPimenta_Click);
+            // 
+            // btnSalPimentaOrdem
+            // 
+            this.btnSalPimentaOrdem.Location = new System.Drawing.Point(548, 463);
+            this.btnSalPimentaOrdem.Name = "btnSalPimentaOrdem";
+            this.btnSalPimentaOrdem.Size = new System.Drawing.Size(147, 54);
+            this.btnSalPimentaOrdem.TabIndex = 35;
+            this.btnSalPimentaOrdem.Text = "Sal Pimenta - Ordem";
+            this.btnSalPimentaOrdem.UseVisualStyleBackColor = true;
+            this.btnSalPimentaOrdem.Click += new System.EventHandler(this.btnSalPimentaOrdem_Click);
+            // 
+            // numericUpDown6
+            // 
+            this.numericUpDown6.Location = new System.Drawing.Point(701, 482);
+            this.numericUpDown6.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numericUpDown6.Name = "numericUpDown6";
+            this.numericUpDown6.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDown6.TabIndex = 36;
+            this.numericUpDown6.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // btnSalPimentaSuavizacao
+            // 
+            this.btnSalPimentaSuavizacao.Location = new System.Drawing.Point(548, 523);
+            this.btnSalPimentaSuavizacao.Name = "btnSalPimentaSuavizacao";
+            this.btnSalPimentaSuavizacao.Size = new System.Drawing.Size(147, 54);
+            this.btnSalPimentaSuavizacao.TabIndex = 37;
+            this.btnSalPimentaSuavizacao.Text = "Sal Pimenta - Suavização";
+            this.btnSalPimentaSuavizacao.UseVisualStyleBackColor = true;
+            this.btnSalPimentaSuavizacao.Click += new System.EventHandler(this.btnSalPimentaSuavizacao_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.Controls.Add(this.btnSalPimentaSuavizacao);
+            this.Controls.Add(this.numericUpDown6);
+            this.Controls.Add(this.btnSalPimentaOrdem);
             this.Controls.Add(this.btnSalPimenta);
             this.Controls.Add(this.comboBoxFiltros);
             this.Controls.Add(this.numericUpDownThreshold);
@@ -530,6 +574,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -573,6 +618,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDownThreshold;
         private System.Windows.Forms.ComboBox comboBoxFiltros;
         private System.Windows.Forms.Button btnSalPimenta;
+        private System.Windows.Forms.Button btnSalPimentaOrdem;
+        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.Button btnSalPimentaSuavizacao;
     }
 }
 

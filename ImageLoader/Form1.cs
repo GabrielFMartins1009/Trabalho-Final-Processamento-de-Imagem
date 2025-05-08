@@ -1045,7 +1045,7 @@ namespace ImageLoader
                             int vizinhoX = x + i;
                             int vizinhoY = y + j;
 
-                            // Tratamento de borda: replica o pixel mais próximo (clamp)
+                            // Tratamento de borda: replica o pixel mais próximo
                             if (vizinhoX < 0) vizinhoX = 0;
                             if (vizinhoY < 0) vizinhoY = 0;
                             if (vizinhoX >= largura) vizinhoX = largura - 1;
@@ -1162,7 +1162,144 @@ namespace ImageLoader
         
 
         }
-}
+        public Bitmap FiltroSalPimentaOrdem(Bitmap imagemOriginal, int ordem)
+        {
+            // Cria uma nova imagem para armazenar o resultado do filtro
+            Bitmap imagemFiltrada = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // Percorre todos os pixels, exceto a borda (por causa da vizinhança 3x3)
+            for (int y = 1; y < imagemOriginal.Height - 1; y++)
+            {
+                for (int x = 1; x < imagemOriginal.Width - 1; x++)
+                {
+                    // Listas para armazenar os valores R, G e B da vizinhança
+                    List<byte> valoresR = new List<byte>();
+                    List<byte> valoresG = new List<byte>();
+                    List<byte> valoresB = new List<byte>();
+
+                    // Percorre a vizinhança 3x3
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            Color pixel = imagemOriginal.GetPixel(x + i, y + j);
+
+                            // Adiciona os canais à lista
+                            valoresR.Add(pixel.R);
+                            valoresG.Add(pixel.G);
+                            valoresB.Add(pixel.B);
+                        }
+                    }
+
+                    // Ordena os valores da vizinhança
+                    valoresR.Sort();
+                    valoresG.Sort();
+                    valoresB.Sort();
+
+                    // Ajusta o índice da ordem (1 = menor, 9 = maior)
+                    int indice = ordem - 1;
+                    if (indice < 0) indice = 0;
+                    if (indice > 8) indice = 8;
+
+
+                    // Seleciona o valor da ordem desejada
+                    byte valorR = valoresR[indice];
+                    byte valorG = valoresG[indice];
+                    byte valorB = valoresB[indice];
+
+                    // Cria a nova cor e define no pixel da imagem filtrada
+                    Color novaCor = Color.FromArgb(valorR, valorG, valorB);
+                    imagemFiltrada.SetPixel(x, y, novaCor);
+                }
+            }
+
+            // Retorna a nova imagem com o filtro aplicado
+            return imagemFiltrada;
+        }
+
+        private void btnSalPimentaOrdem_Click(object sender, EventArgs e)
+        {
+        
+            if (pictureBox1.Image != null)
+            {
+                // Obtém o valor da ordem escolhido pelo usuário (1 a 9)
+                int ordem = (int)numericUpDown6.Value;
+
+                // Criando imagem Original
+                Bitmap ImagemOriginal = new Bitmap(pictureBox1.Image); 
+
+                // Aplica o filtro de ordem
+                Bitmap imagemFiltrada = FiltroSalPimentaOrdem(ImagemOriginal, ordem);
+              
+                // Exibe a imagem filtrada
+                pictureBox3.Image = imagemFiltrada;
+            }
+            else
+            {
+                MessageBox.Show("Carregue uma imagem primeiro.");
+            }
+        }
+
+        public Bitmap FitroSalPimentaSuavizacao(Bitmap img)
+        {
+            Bitmap novaImg = new Bitmap(img.Width, img.Height);
+
+            for (int y = 1; y < img.Height - 1; y++)
+            {
+                for (int x = 1; x < img.Width - 1; x++)
+                {
+                    List<byte> vizinhosR = new List<byte>();
+                    List<byte> vizinhosG = new List<byte>();
+                    List<byte> vizinhosB = new List<byte>();
+
+                    // Percorre os 8 vizinhos (3x3, excluindo o pixel central)
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            if (i == 0 && j == 0) continue; // Pula o centro
+                            Color corVizinho = img.GetPixel(x + i, y + j);
+                            vizinhosR.Add(corVizinho.R);
+                            vizinhosG.Add(corVizinho.G);
+                            vizinhosB.Add(corVizinho.B);
+                        }
+                    }
+
+                    // Pega o pixel central
+                    Color pixelCentral = img.GetPixel(x, y);
+
+                    // Aplica a lógica do filtro para cada canal
+                    byte r = ClampConservador(pixelCentral.R, vizinhosR);
+                    byte g = ClampConservador(pixelCentral.G, vizinhosG);
+                    byte b = ClampConservador(pixelCentral.B, vizinhosB);
+
+                    novaImg.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            return novaImg;
+        }
+
+        // Função auxiliar para aplicar o filtro conservador a um canal
+        private byte ClampConservador(byte valorCentral, List<byte> vizinhos)
+        {
+            byte min = vizinhos.Min();
+            byte max = vizinhos.Max();
+
+            if (valorCentral < min) return min;
+            if (valorCentral > max) return max;
+            return valorCentral;
+        }
+
+        private void btnSalPimentaSuavizacao_Click(object sender, EventArgs e)
+        {
+            if (img1 != null)
+            {
+                Bitmap resultado = FitroSalPimentaSuavizacao(img1);
+                pictureBox3.Image = resultado;
+            }
+        }
+    }
 }
 
 
