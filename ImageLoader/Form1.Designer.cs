@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -68,6 +68,11 @@
             this.btnSalPimentaOrdem = new System.Windows.Forms.Button();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.btnSalPimentaSuavizacao = new System.Windows.Forms.Button();
+            this.btnFiltroGaussiano = new System.Windows.Forms.Button();
+            this.numericUpDownKernel = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSigma = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -79,6 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKernel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigma)).BeginInit();
             this.SuspendLayout();
             // 
             // btImgA
@@ -373,8 +380,8 @@
             // 
             this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
             this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
-            chartArea2.Name = "Histograma";
-            this.chartHistograma.ChartAreas.Add(chartArea2);
+            chartArea3.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea3);
             this.chartHistograma.Location = new System.Drawing.Point(12, 714);
             this.chartHistograma.Name = "chartHistograma";
             this.chartHistograma.Size = new System.Drawing.Size(368, 245);
@@ -466,7 +473,7 @@
             "MAX",
             "MIN",
             "MEAN"});
-            this.comboBoxFiltros.Location = new System.Drawing.Point(872, 421);
+            this.comboBoxFiltros.Location = new System.Drawing.Point(816, 403);
             this.comboBoxFiltros.Name = "comboBoxFiltros";
             this.comboBoxFiltros.Size = new System.Drawing.Size(147, 21);
             this.comboBoxFiltros.TabIndex = 33;
@@ -519,11 +526,96 @@
             this.btnSalPimentaSuavizacao.UseVisualStyleBackColor = true;
             this.btnSalPimentaSuavizacao.Click += new System.EventHandler(this.btnSalPimentaSuavizacao_Click);
             // 
+            // btnFiltroGaussiano
+            // 
+            this.btnFiltroGaussiano.Location = new System.Drawing.Point(816, 463);
+            this.btnFiltroGaussiano.Name = "btnFiltroGaussiano";
+            this.btnFiltroGaussiano.Size = new System.Drawing.Size(147, 54);
+            this.btnFiltroGaussiano.TabIndex = 38;
+            this.btnFiltroGaussiano.Text = "Gaussiano";
+            this.btnFiltroGaussiano.UseVisualStyleBackColor = true;
+            this.btnFiltroGaussiano.Click += new System.EventHandler(this.btnFiltroGaussiano_Click);
+            // 
+            // numericUpDownKernel
+            // 
+            this.numericUpDownKernel.DecimalPlaces = 1;
+            this.numericUpDownKernel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.numericUpDownKernel.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownKernel.Location = new System.Drawing.Point(965, 497);
+            this.numericUpDownKernel.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numericUpDownKernel.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownKernel.Name = "numericUpDownKernel";
+            this.numericUpDownKernel.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDownKernel.TabIndex = 39;
+            this.numericUpDownKernel.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownSigma
+            // 
+            this.numericUpDownSigma.DecimalPlaces = 1;
+            this.numericUpDownSigma.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownSigma.Location = new System.Drawing.Point(965, 463);
+            this.numericUpDownSigma.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownSigma.Name = "numericUpDownSigma";
+            this.numericUpDownSigma.Size = new System.Drawing.Size(66, 20);
+            this.numericUpDownSigma.TabIndex = 40;
+            this.numericUpDownSigma.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1037, 504);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 41;
+            this.label2.Text = "Kernel";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1037, 463);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.TabIndex = 42;
+            this.label3.Text = "Sigma";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.numericUpDownSigma);
+            this.Controls.Add(this.numericUpDownKernel);
+            this.Controls.Add(this.btnFiltroGaussiano);
             this.Controls.Add(this.btnSalPimentaSuavizacao);
             this.Controls.Add(this.numericUpDown6);
             this.Controls.Add(this.btnSalPimentaOrdem);
@@ -575,6 +667,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartHistograma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKernel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigma)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -621,6 +715,11 @@
         private System.Windows.Forms.Button btnSalPimentaOrdem;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.Button btnSalPimentaSuavizacao;
+        private System.Windows.Forms.Button btnFiltroGaussiano;
+        private System.Windows.Forms.NumericUpDown numericUpDownKernel;
+        private System.Windows.Forms.NumericUpDown numericUpDownSigma;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -1299,6 +1299,115 @@ namespace ImageLoader
                 pictureBox3.Image = resultado;
             }
         }
+ 
+
+        private Bitmap FiltroGaussiano(Bitmap imagem, int tamanhoKernel, double sigma)
+        {
+            // Cria a imagem de saída com as mesmas dimensões da original
+            Bitmap imagemFiltrada = new Bitmap(imagem.Width, imagem.Height);
+
+            // Cria o kernel Gaussiano com base nos parâmetros
+            double[,] kernel = GerarKernelGaussiano(tamanhoKernel, sigma);
+
+            int offset = tamanhoKernel / 2; // Para posicionar o centro do kernel
+
+            // Percorre cada pixel da imagem original
+            for (int y = offset; y < imagem.Height - offset; y++)
+            {
+                for (int x = offset; x < imagem.Width - offset; x++)
+                {
+                    double somaR = 0, somaG = 0, somaB = 0;
+
+                    // Percorre o kernel ao redor do pixel atual
+                    for (int ky = -offset; ky <= offset; ky++)
+                    {
+                        for (int kx = -offset; kx <= offset; kx++)
+                        {
+                            // Pega o pixel vizinho
+                            Color pixel = imagem.GetPixel(x + kx, y + ky);
+
+                            // Pega o peso do kernel correspondente
+                            double peso = kernel[ky + offset, kx + offset];
+
+                            // Aplica o peso a cada canal (R, G, B)
+                            somaR += pixel.R * peso;
+                            somaG += pixel.G * peso;
+                            somaB += pixel.B * peso;
+                        }
+                    }
+
+                    // Clampeia os valores para o intervalo [0, 255] e converte para inteiro
+                    int r = Math.Min(255, Math.Max(0, (int)Math.Round(somaR)));
+                    int g = Math.Min(255, Math.Max(0, (int)Math.Round(somaG)));
+                    int b = Math.Min(255, Math.Max(0, (int)Math.Round(somaB)));
+
+                    // Define o pixel filtrado na imagem de saída
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            return imagemFiltrada; // Retorna a imagem suavizada
+        }
+        private double[,] GerarKernelGaussiano(int tamanho, double sigma)
+        {
+            double[,] kernel = new double[tamanho, tamanho];
+            double soma = 0;
+
+            int offset = tamanho / 2;
+            double constante = 1.0 / (2 * Math.PI * sigma * sigma);
+
+            // Preenche o kernel com os valores da fórmula gaussiana
+            for (int y = -offset; y <= offset; y++)
+            {
+                for (int x = -offset; x <= offset; x++)
+                {
+                    double expoente = -(x * x + y * y) / (2 * sigma * sigma);
+                    double valor = constante * Math.Exp(expoente);
+                    kernel[y + offset, x + offset] = valor;
+                    soma += valor; // Soma total para normalização
+                }
+            }
+
+            // Normaliza os valores para que a soma do kernel seja 1
+            for (int y = 0; y < tamanho; y++)
+            {
+                for (int x = 0; x < tamanho; x++)
+                {
+                    kernel[y, x] /= soma;
+                }
+            }
+
+            return kernel;
+        }
+
+        private void btnFiltroGaussiano_Click(object sender, EventArgs e)
+        {
+            // Verifica se a imagem original foi carregada
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem primeiro.");
+                return; // Sai da função se não houver imagem
+            }
+
+            // Obtém o valor do tamanho do kernel a partir do controle NumericUpDown do Kernel
+            int tamanhoKernel = (int)numericUpDownKernel.Value;
+
+            // Obtém o valor do desvio-padrão sigma a partir do controle NumericUpDown do Sigma
+            double sigma = (double)numericUpDownSigma.Value;
+
+            // Verifica se o tamanho do kernel é ímpar (obrigatório para ter um centro)
+            if (tamanhoKernel % 2 == 0)
+            {
+                MessageBox.Show("O tamanho do kernel deve ser ímpar.");
+                return; // Sai da função se o valor for par
+            }
+
+            // Aplica o filtro Gaussiano na imagem original usando os parâmetros escolhidos
+            Bitmap imagemFiltrada = FiltroGaussiano(img1, tamanhoKernel, sigma);
+
+            // Exibe a imagem filtrada no PictureBox3
+            pictureBox3.Image = imagemFiltrada;
+        }
     }
 }
 
