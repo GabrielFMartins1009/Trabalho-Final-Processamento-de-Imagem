@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -73,6 +73,10 @@
             this.numericUpDownSigma = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnPrewitt = new System.Windows.Forms.Button();
+            this.btnSobel = new System.Windows.Forms.Button();
+            this.btnLaplaciano = new System.Windows.Forms.Button();
+            this.comboBoxLaplaciano = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -380,8 +384,8 @@
             // 
             this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
             this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
-            chartArea3.Name = "Histograma";
-            this.chartHistograma.ChartAreas.Add(chartArea3);
+            chartArea5.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea5);
             this.chartHistograma.Location = new System.Drawing.Point(12, 714);
             this.chartHistograma.Name = "chartHistograma";
             this.chartHistograma.Size = new System.Drawing.Size(368, 245);
@@ -466,6 +470,7 @@
             // 
             // comboBoxFiltros
             // 
+            this.comboBoxFiltros.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.comboBoxFiltros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.comboBoxFiltros.FormattingEnabled = true;
@@ -473,7 +478,7 @@
             "MAX",
             "MIN",
             "MEAN"});
-            this.comboBoxFiltros.Location = new System.Drawing.Point(816, 403);
+            this.comboBoxFiltros.Location = new System.Drawing.Point(1137, 402);
             this.comboBoxFiltros.Name = "comboBoxFiltros";
             this.comboBoxFiltros.Size = new System.Drawing.Size(147, 21);
             this.comboBoxFiltros.TabIndex = 33;
@@ -528,7 +533,7 @@
             // 
             // btnFiltroGaussiano
             // 
-            this.btnFiltroGaussiano.Location = new System.Drawing.Point(816, 463);
+            this.btnFiltroGaussiano.Location = new System.Drawing.Point(816, 403);
             this.btnFiltroGaussiano.Name = "btnFiltroGaussiano";
             this.btnFiltroGaussiano.Size = new System.Drawing.Size(147, 54);
             this.btnFiltroGaussiano.TabIndex = 38;
@@ -545,7 +550,7 @@
             0,
             0,
             0});
-            this.numericUpDownKernel.Location = new System.Drawing.Point(965, 497);
+            this.numericUpDownKernel.Location = new System.Drawing.Point(965, 437);
             this.numericUpDownKernel.Maximum = new decimal(new int[] {
             25,
             0,
@@ -573,7 +578,7 @@
             0,
             0,
             65536});
-            this.numericUpDownSigma.Location = new System.Drawing.Point(965, 463);
+            this.numericUpDownSigma.Location = new System.Drawing.Point(965, 403);
             this.numericUpDownSigma.Minimum = new decimal(new int[] {
             1,
             0,
@@ -591,7 +596,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1037, 504);
+            this.label2.Location = new System.Drawing.Point(1037, 444);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 41;
@@ -600,17 +605,67 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1037, 463);
+            this.label3.Location = new System.Drawing.Point(1037, 403);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 42;
             this.label3.Text = "Sigma";
+            // 
+            // btnPrewitt
+            // 
+            this.btnPrewitt.Location = new System.Drawing.Point(816, 463);
+            this.btnPrewitt.Name = "btnPrewitt";
+            this.btnPrewitt.Size = new System.Drawing.Size(147, 54);
+            this.btnPrewitt.TabIndex = 43;
+            this.btnPrewitt.Text = "Prewitt";
+            this.btnPrewitt.UseVisualStyleBackColor = true;
+            this.btnPrewitt.Click += new System.EventHandler(this.btnPrewitt_Click);
+            // 
+            // btnSobel
+            // 
+            this.btnSobel.Location = new System.Drawing.Point(815, 523);
+            this.btnSobel.Name = "btnSobel";
+            this.btnSobel.Size = new System.Drawing.Size(147, 54);
+            this.btnSobel.TabIndex = 44;
+            this.btnSobel.Text = "Sobel";
+            this.btnSobel.UseVisualStyleBackColor = true;
+            this.btnSobel.Click += new System.EventHandler(this.btnSobel_Click);
+            // 
+            // btnLaplaciano
+            // 
+            this.btnLaplaciano.Location = new System.Drawing.Point(815, 583);
+            this.btnLaplaciano.Name = "btnLaplaciano";
+            this.btnLaplaciano.Size = new System.Drawing.Size(147, 54);
+            this.btnLaplaciano.TabIndex = 45;
+            this.btnLaplaciano.Text = "Laplaciano";
+            this.btnLaplaciano.UseVisualStyleBackColor = true;
+            this.btnLaplaciano.Click += new System.EventHandler(this.btnLaplaciano_Click);
+            // 
+            // comboBoxLaplaciano
+            // 
+            this.comboBoxLaplaciano.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxLaplaciano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLaplaciano.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxLaplaciano.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBoxLaplaciano.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.comboBoxLaplaciano.FormattingEnabled = true;
+            this.comboBoxLaplaciano.Items.AddRange(new object[] {
+            "4-vizinhos",
+            "8-vizinhos"});
+            this.comboBoxLaplaciano.Location = new System.Drawing.Point(968, 602);
+            this.comboBoxLaplaciano.Name = "comboBoxLaplaciano";
+            this.comboBoxLaplaciano.Size = new System.Drawing.Size(147, 21);
+            this.comboBoxLaplaciano.TabIndex = 46;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.Controls.Add(this.comboBoxLaplaciano);
+            this.Controls.Add(this.btnLaplaciano);
+            this.Controls.Add(this.btnSobel);
+            this.Controls.Add(this.btnPrewitt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numericUpDownSigma);
@@ -720,6 +775,10 @@
         private System.Windows.Forms.NumericUpDown numericUpDownSigma;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnPrewitt;
+        private System.Windows.Forms.Button btnSobel;
+        private System.Windows.Forms.Button btnLaplaciano;
+        private System.Windows.Forms.ComboBox comboBoxLaplaciano;
     }
 }
 

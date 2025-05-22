@@ -1408,7 +1408,181 @@ namespace ImageLoader
             // Exibe a imagem filtrada no PictureBox3
             pictureBox3.Image = imagemFiltrada;
         }
+
+        public Bitmap FiltroPrimeiraOrdem(Bitmap imagem, int[,] kernelX, int[,] kernelY)
+        {
+            int largura = imagem.Width;
+            int altura = imagem.Height;
+            Bitmap imagemSaida = new Bitmap(largura, altura);
+
+            int offset = 1; // porque os kernels são 3x3
+
+            for (int y = offset; y < altura - offset; y++)
+            {
+                for (int x = offset; x < largura - offset; x++)
+                {
+                    int somaX = 0;
+                    int somaY = 0;
+
+                    // Aplica os kernels
+                    for (int ky = -offset; ky <= offset; ky++)
+                    {
+                        for (int kx = -offset; kx <= offset; kx++)
+                        {
+                            Color cor = imagem.GetPixel(x + kx, y + ky);
+                            int intensidade = (cor.R + cor.G + cor.B) / 3;
+
+                            somaX += intensidade * kernelX[ky + offset, kx + offset];
+                            somaY += intensidade * kernelY[ky + offset, kx + offset];
+                        }
+                    }
+
+                    // Magnitude do gradiente
+                    int magnitude = (int)Math.Sqrt(somaX * somaX + somaY * somaY);
+
+                    // Limita entre 0 e 255
+                    magnitude = Math.Max(0, Math.Min(255, magnitude));
+
+                    Color corNova = Color.FromArgb(magnitude, magnitude, magnitude);
+                    imagemSaida.SetPixel(x, y, corNova);
+                }
+            }
+
+            return imagemSaida;
+        }
+
+        private void btnPrewitt_Click(object sender, EventArgs e)
+        {
+            int[,] prewittX = new int[3, 3] {
+                 { -1, 0, 1 },
+                 { -1, 0, 1 },
+                 { -1, 0, 1 }
+    };
+
+            int[,] prewittY = new int[3, 3] {
+                 {  1,  1,  1 },
+                 {  0,  0,  0 },
+                 { -1, -1, -1 }
+    };
+
+            if (img1 != null)
+            {
+                Bitmap resultado = FiltroPrimeiraOrdem(img1, prewittX, prewittY);
+                pictureBox3.Image = resultado;
+            }
+        }
+
+        private void btnSobel_Click(object sender, EventArgs e)
+        {
+            int[,] sobelX = new int[3, 3] {
+                { -1, 0, 1 },
+                { -2, 0, 2 },
+                { -1, 0, 1 }
+    };
+
+            int[,] sobelY = new int[3, 3] {
+                {  1,  2,  1 },
+                {  0,  0,  0 },
+                { -1, -2, -1 }
+    };
+
+            if (img1 != null)
+            {
+                Bitmap resultado = FiltroPrimeiraOrdem(img1, sobelX, sobelY);
+                pictureBox3.Image = resultado;
+            }
+        }
+        public Bitmap FiltroSegundaOrdem(Bitmap imagem, int[,] laplaciano)
+        {
+            int largura = imagem.Width;
+            int altura = imagem.Height;
+
+            // Cria uma nova imagem para armazenar o resultado
+            Bitmap imagemFiltrada = new Bitmap(largura, altura);
+
+            int offset = 1; // Porque a máscara é 3x3, o centro é 1 pixel longe da borda
+
+            // Percorre cada pixel da imagem, ignorando as bordas
+            for (int y = offset; y < altura - offset; y++)
+            {
+                for (int x = offset; x < largura - offset; x++)
+                {
+                    int soma = 0;
+
+                    // Aplica a convolução: percorre a vizinhança 3x3 ao redor do pixel (x, y)
+                    for (int ky = -offset; ky <= offset; ky++)
+                    {
+                        for (int kx = -offset; kx <= offset; kx++)
+                        {
+                            // Captura a cor do pixel vizinho
+                            Color corVizinho = imagem.GetPixel(x + kx, y + ky);
+
+                            // Converte para tons de cinza usando média dos canais RGB
+                            int intensidade = (corVizinho.R + corVizinho.G + corVizinho.B) / 3;
+
+                            // Multiplica a intensidade pelo peso do kernel
+                            soma += intensidade * laplaciano[ky + offset, kx + offset];
+                        }
+                    }
+
+                    // Usa valor absoluto para garantir que o resultado esteja entre 0 e 255
+                    soma = Math.Abs(soma);
+                    soma = Math.Min(255, Math.Max(0, soma)); // Clampeia para faixa válida
+
+                    // Cria a nova cor em tons de cinza
+                    Color novaCor = Color.FromArgb(soma, soma, soma);
+
+                    // Define o pixel filtrado na imagem final
+                    imagemFiltrada.SetPixel(x, y, novaCor);
+                }
+            }
+
+            return imagemFiltrada; // Retorna a imagem com as bordas detectadas
+        }
+
+
+        private void btnLaplaciano_Click(object sender, EventArgs e)
+        {
+            if (img1 != null)
+            {
+                // Verifica qual máscara foi selecionada no ComboBox
+                int[,] laplaciano;
+
+                if (comboBoxLaplaciano.SelectedItem.ToString() == "4-vizinhos")
+                {
+                    // Máscara com 4 vizinhos (sem diagonais)
+                    laplaciano = new int[3, 3]
+                    {
+                {  0, -1,  0 },
+                { -1,  4, -1 },
+                {  0, -1,  0 }
+                    };
+                }
+                else
+                {
+                    // Máscara com 8 vizinhos (com diagonais)
+                    laplaciano = new int[3, 3]
+                    {
+                { -1, -1, -1 },
+                { -1,  8, -1 },
+                { -1, -1, -1 }
+                    };
+                }
+
+                // Aplica o filtro com a máscara escolhida
+                Bitmap resultado = FiltroSegundaOrdem(img1, laplaciano);
+
+                // Exibe no PictureBox3
+                pictureBox3.Image = resultado;
+            }
+            else
+            {
+                MessageBox.Show("Carregue uma imagem primeiro.");
+            }
+        }
+
     }
 }
+
 
 
