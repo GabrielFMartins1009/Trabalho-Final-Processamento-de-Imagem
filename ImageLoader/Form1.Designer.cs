@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.btImgA = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -77,6 +77,13 @@
             this.btnSobel = new System.Windows.Forms.Button();
             this.btnLaplaciano = new System.Windows.Forms.Button();
             this.comboBoxLaplaciano = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDilatacao = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.comboBoxSE = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -90,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKernel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigma)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btImgA
@@ -372,7 +380,7 @@
             // 
             // btMedia
             // 
-            this.btMedia.Location = new System.Drawing.Point(361, 403);
+            this.btMedia.Location = new System.Drawing.Point(271, 403);
             this.btMedia.Name = "btMedia";
             this.btMedia.Size = new System.Drawing.Size(147, 54);
             this.btMedia.TabIndex = 24;
@@ -384,16 +392,16 @@
             // 
             this.chartHistograma.BackColor = System.Drawing.Color.DarkGray;
             this.chartHistograma.BorderlineColor = System.Drawing.Color.Red;
-            chartArea5.Name = "Histograma";
-            this.chartHistograma.ChartAreas.Add(chartArea5);
-            this.chartHistograma.Location = new System.Drawing.Point(12, 714);
+            chartArea6.Name = "Histograma";
+            this.chartHistograma.ChartAreas.Add(chartArea6);
+            this.chartHistograma.Location = new System.Drawing.Point(14, 714);
             this.chartHistograma.Name = "chartHistograma";
             this.chartHistograma.Size = new System.Drawing.Size(368, 245);
             this.chartHistograma.TabIndex = 25;
             // 
             // btEqualizar
             // 
-            this.btEqualizar.Location = new System.Drawing.Point(548, 583);
+            this.btEqualizar.Location = new System.Drawing.Point(458, 583);
             this.btEqualizar.Name = "btEqualizar";
             this.btEqualizar.Size = new System.Drawing.Size(147, 54);
             this.btEqualizar.TabIndex = 26;
@@ -403,7 +411,7 @@
             // 
             // btnNot
             // 
-            this.btnNot.Location = new System.Drawing.Point(361, 463);
+            this.btnNot.Location = new System.Drawing.Point(271, 463);
             this.btnNot.Name = "btnNot";
             this.btnNot.Size = new System.Drawing.Size(147, 54);
             this.btnNot.TabIndex = 27;
@@ -413,7 +421,7 @@
             // 
             // btnAnd
             // 
-            this.btnAnd.Location = new System.Drawing.Point(361, 523);
+            this.btnAnd.Location = new System.Drawing.Point(271, 523);
             this.btnAnd.Name = "btnAnd";
             this.btnAnd.Size = new System.Drawing.Size(147, 54);
             this.btnAnd.TabIndex = 28;
@@ -423,7 +431,7 @@
             // 
             // btnOr
             // 
-            this.btnOr.Location = new System.Drawing.Point(361, 583);
+            this.btnOr.Location = new System.Drawing.Point(271, 583);
             this.btnOr.Name = "btnOr";
             this.btnOr.Size = new System.Drawing.Size(147, 54);
             this.btnOr.TabIndex = 29;
@@ -433,7 +441,7 @@
             // 
             // btnXor
             // 
-            this.btnXor.Location = new System.Drawing.Point(361, 643);
+            this.btnXor.Location = new System.Drawing.Point(271, 643);
             this.btnXor.Name = "btnXor";
             this.btnXor.Size = new System.Drawing.Size(147, 54);
             this.btnXor.TabIndex = 30;
@@ -443,7 +451,7 @@
             // 
             // btnLimiar
             // 
-            this.btnLimiar.Location = new System.Drawing.Point(548, 643);
+            this.btnLimiar.Location = new System.Drawing.Point(458, 643);
             this.btnLimiar.Name = "btnLimiar";
             this.btnLimiar.Size = new System.Drawing.Size(147, 54);
             this.btnLimiar.TabIndex = 31;
@@ -453,7 +461,7 @@
             // 
             // numericUpDownThreshold
             // 
-            this.numericUpDownThreshold.Location = new System.Drawing.Point(701, 662);
+            this.numericUpDownThreshold.Location = new System.Drawing.Point(611, 662);
             this.numericUpDownThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -470,15 +478,16 @@
             // 
             // comboBoxFiltros
             // 
-            this.comboBoxFiltros.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.comboBoxFiltros.BackColor = System.Drawing.SystemColors.Window;
             this.comboBoxFiltros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxFiltros.ForeColor = System.Drawing.SystemColors.MenuText;
             this.comboBoxFiltros.FormattingEnabled = true;
             this.comboBoxFiltros.Items.AddRange(new object[] {
             "MAX",
             "MIN",
             "MEAN"});
-            this.comboBoxFiltros.Location = new System.Drawing.Point(1137, 402);
+            this.comboBoxFiltros.Location = new System.Drawing.Point(720, 403);
             this.comboBoxFiltros.Name = "comboBoxFiltros";
             this.comboBoxFiltros.Size = new System.Drawing.Size(147, 21);
             this.comboBoxFiltros.TabIndex = 33;
@@ -486,7 +495,7 @@
             // 
             // btnSalPimenta
             // 
-            this.btnSalPimenta.Location = new System.Drawing.Point(548, 403);
+            this.btnSalPimenta.Location = new System.Drawing.Point(458, 403);
             this.btnSalPimenta.Name = "btnSalPimenta";
             this.btnSalPimenta.Size = new System.Drawing.Size(147, 54);
             this.btnSalPimenta.TabIndex = 34;
@@ -496,7 +505,7 @@
             // 
             // btnSalPimentaOrdem
             // 
-            this.btnSalPimentaOrdem.Location = new System.Drawing.Point(548, 463);
+            this.btnSalPimentaOrdem.Location = new System.Drawing.Point(458, 463);
             this.btnSalPimentaOrdem.Name = "btnSalPimentaOrdem";
             this.btnSalPimentaOrdem.Size = new System.Drawing.Size(147, 54);
             this.btnSalPimentaOrdem.TabIndex = 35;
@@ -506,7 +515,7 @@
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(701, 482);
+            this.numericUpDown6.Location = new System.Drawing.Point(611, 482);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             9,
             0,
@@ -523,7 +532,7 @@
             // 
             // btnSalPimentaSuavizacao
             // 
-            this.btnSalPimentaSuavizacao.Location = new System.Drawing.Point(548, 523);
+            this.btnSalPimentaSuavizacao.Location = new System.Drawing.Point(458, 523);
             this.btnSalPimentaSuavizacao.Name = "btnSalPimentaSuavizacao";
             this.btnSalPimentaSuavizacao.Size = new System.Drawing.Size(147, 54);
             this.btnSalPimentaSuavizacao.TabIndex = 37;
@@ -533,7 +542,7 @@
             // 
             // btnFiltroGaussiano
             // 
-            this.btnFiltroGaussiano.Location = new System.Drawing.Point(816, 403);
+            this.btnFiltroGaussiano.Location = new System.Drawing.Point(721, 463);
             this.btnFiltroGaussiano.Name = "btnFiltroGaussiano";
             this.btnFiltroGaussiano.Size = new System.Drawing.Size(147, 54);
             this.btnFiltroGaussiano.TabIndex = 38;
@@ -550,7 +559,7 @@
             0,
             0,
             0});
-            this.numericUpDownKernel.Location = new System.Drawing.Point(965, 437);
+            this.numericUpDownKernel.Location = new System.Drawing.Point(870, 497);
             this.numericUpDownKernel.Maximum = new decimal(new int[] {
             25,
             0,
@@ -578,7 +587,7 @@
             0,
             0,
             65536});
-            this.numericUpDownSigma.Location = new System.Drawing.Point(965, 403);
+            this.numericUpDownSigma.Location = new System.Drawing.Point(870, 463);
             this.numericUpDownSigma.Minimum = new decimal(new int[] {
             1,
             0,
@@ -596,7 +605,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1037, 444);
+            this.label2.Location = new System.Drawing.Point(942, 504);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 41;
@@ -605,7 +614,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1037, 403);
+            this.label3.Location = new System.Drawing.Point(942, 463);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 42;
@@ -613,7 +622,7 @@
             // 
             // btnPrewitt
             // 
-            this.btnPrewitt.Location = new System.Drawing.Point(816, 463);
+            this.btnPrewitt.Location = new System.Drawing.Point(721, 523);
             this.btnPrewitt.Name = "btnPrewitt";
             this.btnPrewitt.Size = new System.Drawing.Size(147, 54);
             this.btnPrewitt.TabIndex = 43;
@@ -623,7 +632,7 @@
             // 
             // btnSobel
             // 
-            this.btnSobel.Location = new System.Drawing.Point(815, 523);
+            this.btnSobel.Location = new System.Drawing.Point(720, 583);
             this.btnSobel.Name = "btnSobel";
             this.btnSobel.Size = new System.Drawing.Size(147, 54);
             this.btnSobel.TabIndex = 44;
@@ -633,7 +642,7 @@
             // 
             // btnLaplaciano
             // 
-            this.btnLaplaciano.Location = new System.Drawing.Point(815, 583);
+            this.btnLaplaciano.Location = new System.Drawing.Point(720, 643);
             this.btnLaplaciano.Name = "btnLaplaciano";
             this.btnLaplaciano.Size = new System.Drawing.Size(147, 54);
             this.btnLaplaciano.TabIndex = 45;
@@ -652,16 +661,93 @@
             this.comboBoxLaplaciano.Items.AddRange(new object[] {
             "4-vizinhos",
             "8-vizinhos"});
-            this.comboBoxLaplaciano.Location = new System.Drawing.Point(968, 602);
+            this.comboBoxLaplaciano.Location = new System.Drawing.Point(873, 662);
             this.comboBoxLaplaciano.Name = "comboBoxLaplaciano";
             this.comboBoxLaplaciano.Size = new System.Drawing.Size(147, 21);
             this.comboBoxLaplaciano.TabIndex = 46;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBoxSE);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnDilatacao);
+            this.groupBox1.Location = new System.Drawing.Point(1053, 403);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(284, 336);
+            this.groupBox1.TabIndex = 47;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Operações Mofológicas";
+            // 
+            // btnDilatacao
+            // 
+            this.btnDilatacao.Location = new System.Drawing.Point(15, 19);
+            this.btnDilatacao.Name = "btnDilatacao";
+            this.btnDilatacao.Size = new System.Drawing.Size(147, 54);
+            this.btnDilatacao.TabIndex = 0;
+            this.btnDilatacao.Text = "Dilatação";
+            this.btnDilatacao.UseVisualStyleBackColor = true;
+            this.btnDilatacao.Click += new System.EventHandler(this.btnDilatacao_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 54);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Erosão";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(15, 149);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(147, 54);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Abertura";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(15, 209);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(147, 54);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Fechamento";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(15, 270);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(147, 54);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Contorno";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSE
+            // 
+            this.comboBoxSE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSE.FormattingEnabled = true;
+            this.comboBoxSE.Items.AddRange(new object[] {
+            "Quadrado 3x3",
+            "Cruz ",
+            "Circular",
+            "Linha Horizontal",
+            "Linha Vertical"});
+            this.comboBoxSE.Location = new System.Drawing.Point(168, 33);
+            this.comboBoxSE.Name = "comboBoxSE";
+            this.comboBoxSE.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxSE.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1296, 970);
+            this.ClientSize = new System.Drawing.Size(1544, 970);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBoxLaplaciano);
             this.Controls.Add(this.btnLaplaciano);
             this.Controls.Add(this.btnSobel);
@@ -724,6 +810,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownKernel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigma)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -779,6 +866,13 @@
         private System.Windows.Forms.Button btnSobel;
         private System.Windows.Forms.Button btnLaplaciano;
         private System.Windows.Forms.ComboBox comboBoxLaplaciano;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnDilatacao;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox comboBoxSE;
     }
 }
 

@@ -55,7 +55,7 @@ namespace ImageLoader
                 try
                 {
                     img1 = new Bitmap(filePath);
-                   // img2 = new Bitmap(img1.Width, img1.Height);
+                    // img2 = new Bitmap(img1.Width, img1.Height);
                     bLoadImgOK = true;
                 }
                 catch (Exception ex)
@@ -221,7 +221,7 @@ namespace ImageLoader
             {
                 // Se ambas as imagens existirem, soma pixel a pixel
                 imgResultado = SomarImagens(img1, img2);
-            }       
+            }
 
             pictureBox3.Image = imgResultado;
             pictureBox3.Refresh();  // Garante que a imagem seja atualizada no PictureBox
@@ -265,7 +265,7 @@ namespace ImageLoader
             {
                 imgResultado.Dispose(); // Libera a memória da imagem
                 imgResultado = null;
-               
+
             }
 
             if (pictureBox3.Image != null)
@@ -425,9 +425,9 @@ namespace ImageLoader
             float fatorMultiplicacao = 1.5f; // Aumenta contraste em 50%
 
             Bitmap imgMultiplicada = MultiplicarImagem(img1, fatorMultiplicacao);
-           
+
             pictureBox3.Image = imgMultiplicada; // Exibe imagem com mais contraste
-           
+
         }
 
         private void btDiv_Click(object sender, EventArgs e)
@@ -818,7 +818,7 @@ namespace ImageLoader
 
         public Bitmap NotOperation(Bitmap image)
         {
-          
+
             Bitmap result = new Bitmap(image.Width, image.Height);
 
             // Percorre todos os pixels da imagem
@@ -860,7 +860,7 @@ namespace ImageLoader
 
         public Bitmap AndOperation(Bitmap img1, Bitmap img2)
         {
-         
+
             Bitmap result = new Bitmap(img1.Width, img1.Height);
 
             // Percorre todos os pixels
@@ -934,7 +934,7 @@ namespace ImageLoader
         }
 
 
-       
+
         public Bitmap XorOperation(Bitmap img1, Bitmap img2)
         {
             Bitmap result = new Bitmap(img1.Width, img1.Height);
@@ -973,10 +973,10 @@ namespace ImageLoader
                 MessageBox.Show("Carregue duas imagens binárias.");
             }
         }
-     
+
         private Bitmap Threshold(Bitmap img, int limiar)
         {
-      
+
             Bitmap resultado = new Bitmap(img.Width, img.Height);
 
             // Percorre todos os pixels da imagem
@@ -1009,7 +1009,7 @@ namespace ImageLoader
             if (pictureBox1.Image != null)
             {
                 Bitmap original = new Bitmap(pictureBox1.Image);
-                int limiar = (int)numericUpDownThreshold.Value; 
+                int limiar = (int)numericUpDownThreshold.Value;
 
                 Bitmap resultado = Threshold(original, limiar);
                 pictureBox3.Image = resultado;
@@ -1152,14 +1152,14 @@ namespace ImageLoader
 
         private void btnSalPimenta_Click(object sender, EventArgs e)
         {
-         
+
             if (pictureBox1.Image != null)
             {
                 Bitmap original = new Bitmap(pictureBox1.Image);
                 Bitmap resultado = FiltroSalPimentaMediana(original);
                 pictureBox3.Image = resultado;
             }
-        
+
 
         }
         public Bitmap FiltroSalPimentaOrdem(Bitmap imagemOriginal, int ordem)
@@ -1219,18 +1219,18 @@ namespace ImageLoader
 
         private void btnSalPimentaOrdem_Click(object sender, EventArgs e)
         {
-        
+
             if (pictureBox1.Image != null)
             {
                 // Obtém o valor da ordem escolhido pelo usuário (1 a 9)
                 int ordem = (int)numericUpDown6.Value;
 
                 // Criando imagem Original
-                Bitmap ImagemOriginal = new Bitmap(pictureBox1.Image); 
+                Bitmap ImagemOriginal = new Bitmap(pictureBox1.Image);
 
                 // Aplica o filtro de ordem
                 Bitmap imagemFiltrada = FiltroSalPimentaOrdem(ImagemOriginal, ordem);
-              
+
                 // Exibe a imagem filtrada
                 pictureBox3.Image = imagemFiltrada;
             }
@@ -1299,7 +1299,7 @@ namespace ImageLoader
                 pictureBox3.Image = resultado;
             }
         }
- 
+
 
         private Bitmap FiltroGaussiano(Bitmap imagem, int tamanhoKernel, double sigma)
         {
@@ -1581,6 +1581,122 @@ namespace ImageLoader
             }
         }
 
+        public Bitmap Dilatacao(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            int largura = imagemOriginal.Width;
+            int altura = imagemOriginal.Height;
+
+            Bitmap imagemDilatada = new Bitmap(largura, altura);
+
+            int seAltura = elementoEstruturante.GetLength(0);
+            int seLargura = elementoEstruturante.GetLength(1);
+            int offsetY = seAltura / 2;
+            int offsetX = seLargura / 2;
+
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+                    Color cor = imagemOriginal.GetPixel(x, y);
+                    int valorPixel = (cor.R == 255) ? 1 : 0;
+
+                    if (valorPixel == 1)
+                    {
+                        for (int j = 0; j < seAltura; j++)
+                        {
+                            for (int i = 0; i < seLargura; i++)
+                            {
+                                if (elementoEstruturante[j, i] == 1)
+                                {
+                                    int nx = x + i - offsetX;
+                                    int ny = y + j - offsetY;
+
+                                    if (nx >= 0 && nx < largura && ny >= 0 && ny < altura)
+                                    {
+                                        imagemDilatada.SetPixel(nx, ny, Color.White);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return imagemDilatada;
+        }
+
+
+        private void btnDilatacao_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem binária primeiro.");
+                return;
+            }
+
+            // Definição do elemento estruturante de acordo com o ComboBox
+            int[,] SE;
+
+            switch (comboBoxSE.SelectedItem.ToString())
+            {
+                case "Quadrado 3x3":
+                    SE = new int[3, 3]
+                    {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+                    };
+                    break;
+
+                case "Cruz":
+                    SE = new int[3, 3]
+                    {
+                { 0, 1, 0 },
+                { 1, 1, 1 },
+                { 0, 1, 0 }
+                    };
+                    break;
+
+                case "Circular":
+                    SE = new int[5, 5]
+                    {
+                { 0, 0, 1, 0, 0 },
+                { 0, 1, 1, 1, 0 },
+                { 1, 1, 1, 1, 1 },
+                { 0, 1, 1, 1, 0 },
+                { 0, 0, 1, 0, 0 }
+                    };
+                    break;
+
+                case "Linha Horizontal":
+                    SE = new int[1, 5]
+                    {
+                { 1, 1, 1, 1, 1 }
+                    };
+                    break;
+
+                case "Linha Vertical":
+                    SE = new int[5, 1]
+                    {
+                { 1 },
+                { 1 },
+                { 1 },
+                { 1 },
+                { 1 }
+                    };
+                    break;
+
+                default:
+                    MessageBox.Show("Selecione um elemento estruturante válido.");
+                    return;
+            }
+
+            // Aplica a dilatação diretamente sobre a imagem carregada
+            Bitmap resultado = Dilatacao(img1, SE);
+
+            // Exibe o resultado no PictureBox3
+            pictureBox3.Image = resultado;
+        }
     }
 }
 
