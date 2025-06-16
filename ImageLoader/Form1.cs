@@ -77,8 +77,8 @@ namespace ImageLoader
 
                 }
             }
-            Bitmap imagemOriginal = new Bitmap(pictureBox1.Image);
-            ExibirHistograma(imagemOriginal, chartHistograma, "Original");
+            imgOriginal = new Bitmap(pictureBox1.Image);
+            ExibirHistograma(imgOriginal, chartHistograma, "Original");
         }
         private void ConverterParaEscalaDeCinza()
         {
@@ -1586,7 +1586,12 @@ namespace ImageLoader
             int largura = imagemOriginal.Width;
             int altura = imagemOriginal.Height;
 
+            // Inicializa a imagem de saída com fundo preto
             Bitmap imagemDilatada = new Bitmap(largura, altura);
+            using (Graphics g = Graphics.FromImage(imagemDilatada))
+            {
+                g.Clear(Color.Black);
+            }
 
             int seAltura = elementoEstruturante.GetLength(0);
             int seLargura = elementoEstruturante.GetLength(1);
@@ -1600,8 +1605,9 @@ namespace ImageLoader
                     Color cor = imagemOriginal.GetPixel(x, y);
                     int valorPixel = (cor.R == 255) ? 1 : 0;
 
-                    if (valorPixel == 1)
+                    if (valorPixel == 1) // pixel branco ativo
                     {
+                        // Aplica o elemento estruturante
                         for (int j = 0; j < seAltura; j++)
                         {
                             for (int i = 0; i < seLargura; i++)
@@ -1611,6 +1617,7 @@ namespace ImageLoader
                                     int nx = x + i - offsetX;
                                     int ny = y + j - offsetY;
 
+                                    // Se dentro da imagem, pinta de branco
                                     if (nx >= 0 && nx < largura && ny >= 0 && ny < altura)
                                     {
                                         imagemDilatada.SetPixel(nx, ny, Color.White);
@@ -1642,47 +1649,47 @@ namespace ImageLoader
                 case "Quadrado 3x3":
                     SE = new int[3, 3]
                     {
-                { 1, 1, 1 },
-                { 1, 1, 1 },
-                { 1, 1, 1 }
+            { 1, 1, 1 },
+            { 1, 1, 1 },
+            { 1, 1, 1 }
                     };
                     break;
 
                 case "Cruz":
                     SE = new int[3, 3]
                     {
-                { 0, 1, 0 },
-                { 1, 1, 1 },
-                { 0, 1, 0 }
+            { 0, 1, 0 },
+            { 1, 1, 1 },
+            { 0, 1, 0 }
                     };
                     break;
 
                 case "Circular":
                     SE = new int[5, 5]
                     {
-                { 0, 0, 1, 0, 0 },
-                { 0, 1, 1, 1, 0 },
-                { 1, 1, 1, 1, 1 },
-                { 0, 1, 1, 1, 0 },
-                { 0, 0, 1, 0, 0 }
+            { 0, 0, 1, 0, 0 },
+            { 0, 1, 1, 1, 0 },
+            { 1, 1, 1, 1, 1 },
+            { 0, 1, 1, 1, 0 },
+            { 0, 0, 1, 0, 0 }
                     };
                     break;
 
                 case "Linha Horizontal":
                     SE = new int[1, 5]
                     {
-                { 1, 1, 1, 1, 1 }
+            { 1, 1, 1, 1, 1 }
                     };
                     break;
 
                 case "Linha Vertical":
                     SE = new int[5, 1]
                     {
-                { 1 },
-                { 1 },
-                { 1 },
-                { 1 },
-                { 1 }
+            { 1 },
+            { 1 },
+            { 1 },
+            { 1 },
+            { 1 }
                     };
                     break;
 
@@ -1697,8 +1704,320 @@ namespace ImageLoader
             // Exibe o resultado no PictureBox3
             pictureBox3.Image = resultado;
         }
+        public Bitmap Erosao(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            int largura = imagemOriginal.Width;
+            int altura = imagemOriginal.Height;
+
+            // Cria imagem de saída com fundo preto (tudo 0 inicialmente)
+            Bitmap imagemErodida = new Bitmap(largura, altura);
+            using (Graphics g = Graphics.FromImage(imagemErodida))
+            {
+                g.Clear(Color.Black);
+            }
+
+            int seAltura = elementoEstruturante.GetLength(0);
+            int seLargura = elementoEstruturante.GetLength(1);
+            int offsetY = seAltura / 2;
+            int offsetX = seLargura / 2;
+
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+                    bool match = true; // Suponha que vai ser branco
+
+                    // Verifica toda a vizinhança do elemento estruturante
+                    for (int j = 0; j < seAltura; j++)
+                    {
+                        for (int i = 0; i < seLargura; i++)
+                        {
+                            if (elementoEstruturante[j, i] == 1)
+                            {
+                                int nx = x + i - offsetX;
+                                int ny = y + j - offsetY;
+
+                                // Verifica se está dentro da imagem
+                                if (nx >= 0 && nx < largura && ny >= 0 && ny < altura)
+                                {
+                                    Color cor = imagemOriginal.GetPixel(nx, ny);
+                                    int valorPixel = (cor.R == 255) ? 1 : 0;
+
+                                    if (valorPixel == 0) // Se houver um preto, falha
+                                    {
+                                        match = false;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    // Fora da imagem, considera preto (falha)
+                                    match = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!match) break;
+                    }
+
+                    if (match)
+                    {
+                        // Mantém branco
+                        imagemErodida.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            return imagemErodida;
+        }
+
+
+        private void btnErosao_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem binária primeiro.");
+                return;
+            }
+
+            int[,] SE;
+
+            switch (comboBoxErosao.SelectedItem.ToString())
+            {
+                case "Quadrado 3x3":
+                    SE = new int[3, 3]
+                    {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+                    };
+                    break;
+
+                case "Diamante 5x5":
+                    SE = new int[5, 5]
+                    {
+                     { 0, 0, 1, 0, 0 },
+                     { 0, 1, 1, 1, 0 },
+                     { 1, 1, 1, 1, 1 },
+                     { 0, 1, 1, 1, 0 },
+                     { 0, 0, 1, 0, 0 }
+                         };
+                    break;
+
+                case "Linha":
+                    SE = new int[1, 9]
+                    {
+                        { 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+                    };
+                    break;
+
+                default:
+                    MessageBox.Show("Selecione um elemento estruturante válido.");
+                    return;
+            }
+
+            // Aplica a Erosão e mostra no PictureBox3
+            Bitmap resultado = Erosao(img1, SE);
+            pictureBox3.Image = resultado;
+        }
+        public Bitmap Abertura(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            // Aplica Erosão primeiro
+            Bitmap erodida = Erosao(imagemOriginal, elementoEstruturante);
+
+            // Depois aplica Dilatação sobre a imagem erodida
+            Bitmap resultado = Dilatacao(erodida, elementoEstruturante);
+
+            return resultado;
+        }
+
+        private void btnAbertura_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue uma imagem binária primeiro.");
+                return;
+            }
+
+            int[,] SE;
+
+            // Define o elemento estruturante conforme ComboBox
+            switch (comboBoxAbertura.SelectedItem.ToString())
+            {
+                case "Diamante 3x3":
+                    SE = new int[3, 3]
+                    {
+                { 0, 1, 0 },
+                { 1, 1, 1 },
+                { 0, 1, 0 }
+                    };
+                    break;
+
+                case "Quadrado 3x3":
+                    SE = new int[3, 3]
+                    {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+                    };
+                    break;
+
+                case "Linha Horizontal":
+                    SE = new int[1, 7]
+                    {
+                { 1, 1, 1, 1, 1, 1, 1 }
+                    };
+                    break;
+
+                default:
+                    MessageBox.Show("Selecione um elemento estruturante válido.");
+                    return;
+            }
+
+            // Aplica Abertura e exibe no PictureBox3
+            Bitmap resultado = Abertura(img1, SE);
+            pictureBox3.Image = resultado;
+        }
+
+        // Função de Fechamento Morfológico
+        public Bitmap Fechamento(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            // Primeiro aplica a Dilatação na imagem
+            Bitmap imagemDilatada = Dilatacao(imagemOriginal, elementoEstruturante);
+
+            // Depois aplica a Erosão na imagem dilatada
+            Bitmap imagemFechada = Erosao(imagemDilatada, elementoEstruturante);
+
+            // Retorna a imagem resultante do fechamento
+            return imagemFechada;
+        }
+
+
+        private void btnFechamento_Click(object sender, EventArgs e)
+        {
+            if (imgOriginal != null)
+            {
+                //Definir aqui o elemento estruturante que deseja usar.
+                // Exemplo: Elemento estruturante Quadrado 3x3
+                int[,] elementoEstruturante = new int[,]
+                {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+                };
+
+                // Executa a operação de Fechamento
+                Bitmap resultado = Fechamento(imgOriginal, elementoEstruturante);
+
+                // Exibe a imagem resultante no PictureBox3
+                pictureBox3.Image = resultado;
+            }
+            else
+            {
+                MessageBox.Show("Carregue uma imagem primeiro.");
+            }
+        }
+
+        public Bitmap FechamentoAbertura(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            //Primeiro aplica o Fechamento: Dilatação -> Erosão
+            Bitmap imagemFechada = Fechamento(imagemOriginal, elementoEstruturante);
+
+            //Depois aplica a Abertura: Erosão -> Dilatação
+            Bitmap resultado = Abertura(imagemFechada, elementoEstruturante);
+
+            return resultado;
+        }
+        private void btnFechamentoAbertura_Click(object sender, EventArgs e)
+        {
+            if (imgOriginal != null)
+            {
+               
+              
+                int[,] elementoEstruturante = new int[,]
+                {
+            { 1, 1, 1 },
+            { 1, 1, 1 },
+            { 1, 1, 1 }
+                };
+
+                // Executa Fechamento seguido de Abertura
+                Bitmap resultado = FechamentoAbertura(imgOriginal, elementoEstruturante);
+
+                // Mostra o resultado no PictureBox3
+                pictureBox3.Image = resultado;
+            }
+            else
+            {
+                MessageBox.Show("Carregue uma imagem primeiro.");
+            }
+        }
+        public Bitmap Contorno(Bitmap imagemOriginal, int[,] elementoEstruturante)
+        {
+            // Aplica a erosão na imagem original
+            Bitmap imagemErodida = Erosao(imagemOriginal, elementoEstruturante);
+
+            int largura = imagemOriginal.Width;
+            int altura = imagemOriginal.Height;
+
+            // Cria imagem de saída
+            Bitmap imagemContorno = new Bitmap(largura, altura);
+
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+                    // Pega o pixel da imagem original
+                    Color corOriginal = imagemOriginal.GetPixel(x, y);
+                    int valorOriginal = (corOriginal.R == 255) ? 1 : 0;
+
+                    // Pega o pixel da imagem erodida
+                    Color corErodida = imagemErodida.GetPixel(x, y);
+                    int valorErodido = (corErodida.R == 255) ? 1 : 0;
+
+                    // Faz a subtração: Original - Erosão
+                    int valorContorno = valorOriginal - valorErodido;
+
+                    if (valorContorno == 1)
+                    {
+                        imagemContorno.SetPixel(x, y, Color.White);
+                    }
+                    else
+                    {
+                        imagemContorno.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+
+            return imagemContorno;
+        }
+
+        private void btnContorno_Click(object sender, EventArgs e)
+        {
+            if (imgOriginal == null)
+            {
+                MessageBox.Show("Por favor, carregue uma imagem primeiro.");
+                return;
+            }
+
+            
+            int[,] elementoEstruturante = new int[,]
+            {
+        {1,1,1},
+        {1,1,1},
+        {1,1,1}
+            };
+
+            // Aplica o contorno
+            Bitmap resultado = Contorno(imgOriginal, elementoEstruturante);
+
+            // Mostra o resultado no PictureBox3
+            pictureBox3.Image = resultado;
+        }
     }
+
 }
+
 
 
 
